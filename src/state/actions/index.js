@@ -2,20 +2,15 @@ import * as types from '../types';
 import withAuth from '../../utils/axios';
 
 
-
 axios.defaults.baseURL = 'https://bw-refugee-stories.herokuapp.com/';
-
-const action = (type, payload) => {
-    return {
-        type,
-        payload
-    }
-}
 
 export const getUserStories = () => dispatch => {
     axios.get('/api/stories')
         .then(response => {
-            dispatch(action(types.GET_USER_STORIES, response.data));
+            dispatch({
+                type: types.GET_USER_STORIES, 
+                payload: response.data
+            });
         })
         .catch(error => console.log(error))
 }
@@ -23,7 +18,10 @@ export const getUserStories = () => dispatch => {
 export const getPendingStories = () => dispatch => {
     withAuth().get('/api/admin/stories')
         .then(response => {
-            dispatch(action(types.GET_PENDING_STORIES, response.data));
+            dispatch({
+                type: types.GET_PENDING_STORIES, 
+                payload: response.data
+            });
         })
         .catch(error => console.log(error))
 }
@@ -31,7 +29,9 @@ export const getPendingStories = () => dispatch => {
 export const addStory = (story) => dispatch => {
     axios.post('/api/stories', story)
         .then(res => {
-            dispatch(action(types.ADD_A_STORY, null));
+            dispatch({
+                type: types.ADD_A_STORY
+            });
         })
         .catch(error => console.log(error))
 }
@@ -39,7 +39,9 @@ export const addStory = (story) => dispatch => {
 export const approveStory = (id, story) => dispatch => {
     withAuth().post(` /api/admin/stories/approve/${id}`, story)
         .then(res => {
-            dispatch(action(types.APPROVE_STORY, null));
+            dispatch({
+                type: types.APPROVE_STORY
+            });
         })
         .catch(error => console.log(error))
 }
@@ -47,7 +49,9 @@ export const approveStory = (id, story) => dispatch => {
 export const rejectStory = (id) => dispatch => {
     withAuth().delete(` /api/admin/stories/reject/${id}`)
         .then(res => {
-            dispatch(action(types.REJECT_STORY, null));
+            dispatch({
+                type: types.REJECT_STORY
+            });
         })
         .catch(error => console.log(error))
 }
@@ -55,7 +59,9 @@ export const rejectStory = (id) => dispatch => {
 export const deleteStory = (id) => dispatch => {
     withAuth().delete(` /api/admin/stories/delete/${id}`)
         .then(res => {
-            dispatch(action(types.DELETE_STORY, null));
+            dispatch({
+                type: types.DELETE_STORY
+            });
         })
         .catch(error => console.log(error))
 }
