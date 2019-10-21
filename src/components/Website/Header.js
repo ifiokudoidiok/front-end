@@ -1,13 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import Navigation from './Navigation';
 
 const Header = ({ height, title, description }) => {
     return (
         <StyledHeader height={height}>
             <div className="hero-background">
-                <img src="https://source.unsplash.com/1600x900/?refugee" alt="Randomized refugee image from Unsplash" />
+                <img src="https://source.unsplash.com/1600x900/?refugees,refugee" alt="Randomized refugee resource from Unsplash" />
             </div>
             <div className="hero-content">
+                <Navigation />
+
                 <h1>{title}</h1>
                 <p>{description}</p>
             </div>
@@ -21,7 +24,7 @@ const StyledHeader = styled.header`
     position: relative;
     overflow: hidden;
     padding: 2rem;
-    padding-bottom: 4rem;
+    padding-bottom: 6rem;
     height: ${props => props.height};
 
     .hero-background {
@@ -31,12 +34,6 @@ const StyledHeader = styled.header`
         bottom: 0;
         left: 0;
         right: 0;
-
-        img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-        }
 
         &:before {
             content: "";
@@ -48,7 +45,7 @@ const StyledHeader = styled.header`
             right: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.75);
             transition: 0.4s ease-out;
             z-index: 2;
         }
@@ -68,7 +65,7 @@ const StyledHeader = styled.header`
         color: #fff;
 
         h1 {
-            font-size: 5rem;
+            font-size: 7rem;
             margin-bottom: 1rem;
         }
 
