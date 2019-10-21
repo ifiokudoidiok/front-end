@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import Login from "../../pages/Login";
+import Login from "../../pages/LoginComponents/Login";
 import Register from "../../pages/Register";
 
 const OnboardingRouter = () => (
