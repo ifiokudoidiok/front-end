@@ -1,5 +1,6 @@
 import React from "react";
 import WebsiteRouter from '../Router/WebsiteRouter';
+import Header from "../Website/Header";
 
 
 const WebsiteLayout = () => (
@@ -8,4 +9,4 @@ const WebsiteLayout = () => (
     </>
 );
 
-export default WebsiteLayout
+export default WebsiteLayout;
