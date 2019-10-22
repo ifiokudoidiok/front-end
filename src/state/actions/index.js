@@ -28,10 +28,8 @@ export const getPendingStories = () => dispatch => {
         .catch(error => console.log(error))
 }
 
-export const addStory = (story) => async dispatch => {
-    requestResolved();
-
-    await axios.post('/api/stories', story)
+export const addStory = (story) => dispatch => {
+    axios.post('/api/stories', story)
         .then(res => {
             dispatch({
                 type: types.ADD_A_STORY
@@ -40,7 +38,6 @@ export const addStory = (story) => async dispatch => {
                 type: types.REQUEST_WAS_RESOLVED, 
                 payload: true
             })
-            console.log(res)
         })
         .catch(error => {
             dispatch({

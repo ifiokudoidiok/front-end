@@ -1,19 +1,24 @@
 import React, { useEffect } from "react";
 import { connect } from 'react-redux';
 import * as actions from '../state/actions';
+
 import styled from 'styled-components';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import Header from '../components/Website/Header';
-import Roller from '../components/LoadingIndicator/roller';
+
 import useForm from '../utils/hooks/useForm';
 import useDialog from '../utils/hooks/useDialog';
+
+import Header from '../components/Website/Header';
+import Roller from '../components/LoadingIndicator/roller';
 import AlertDialog from '../components/Modal/AlertDialog';
+
 
 
 const SubmitStory = ({ addStory, resolved, error }) => {
 
     const handleStorySubmit = () => {
         startLoader();
+        markAsSubmitted();
         addStory(values);
     }
 
@@ -23,6 +28,7 @@ const SubmitStory = ({ addStory, resolved, error }) => {
         makeBtnNotVisible();
     }
 
+    const [ isSubmitted, markAsSubmitted ] = useDialog(false);
     const [ isLoading, startLoader, stopLoader ] = useDialog(false);
     const [ isAlertOpen, openAlert, closeAlert ] = useDialog(false);
     const [ isBtnVisible, makeBtnVisible, makeBtnNotVisible ] = useDialog(false);
@@ -38,10 +44,10 @@ const SubmitStory = ({ addStory, resolved, error }) => {
     }, [title, story]) // eslint-disable-line
 
     useEffect(() => {
-        if(resolved) { 
+        if(resolved & isSubmitted) { 
             handleAPIResponse();
             openAlert();
-        } else if(error.status) {
+        } else if(error.status & isSubmitted) {
             handleAPIResponse();
         }
     }, [resolved, error]) // eslint-disable-line
@@ -75,6 +81,20 @@ const SubmitStory = ({ addStory, resolved, error }) => {
                 <AlertDialog 
                     open={isAlertOpen}
                     handleClose={closeAlert}
+                    title='Story Submitted'
+                    description="Your story was submitted successfully. Please wait a few hours for confirmation of approval!"
+                    dialogActions={[
+                        {
+                            id: 1,
+                            text: "Go to home",
+                            route: "/"
+                        },
+                        {
+                            id: 2,
+                            text: "Submit new story",
+                            route: "/submit-story"
+                        },
+                    ]}
                 />
             </StyledContainer>
         </>
