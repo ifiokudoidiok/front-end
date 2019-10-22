@@ -106,7 +106,8 @@ export default connect(state => state, actions)(SubmitStory);
 const StyledContainer = styled.main`
     width: 90vw;
     max-width: ${props => props.theme.mediumMaxWidth};
-    margin: 8rem auto 3rem;
+    margin: 0 auto;
+    padding: ${props => props.theme.containerWrap};
 
     form {
         label {

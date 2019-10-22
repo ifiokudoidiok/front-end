@@ -5,7 +5,7 @@ const initialUserStories = [];
 export const userStoriesReducer = (state = initialUserStories, actions) => {
     switch(actions.type) {
         case types.GET_USER_STORIES:
-            return state;
+            return actions.payload;
         case types.DELETE_STORY:
             return state;
         default:
