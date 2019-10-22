@@ -37,6 +37,21 @@ export const GlobalStyles = createGlobalStyle`
         object-fit: cover;
     }
 
+    .Toastify__toast {
+        padding: 8px 10px 8px 15px !important;
+    }
+
+    .Toastify__toast--error {
+        background: #ab493f
+    }
+    
+    .Toastify__toast-body {
+        margin: auto 0;
+        flex: 1 1;
+        font-size: 1.7rem;
+        font-family: ${props => props.theme.bodyFont};
+    }
+
     .Alert-dialog {
         a {
             font-family: ${props => props.theme.bodyFont};

@@ -4,6 +4,7 @@ import * as actions from '../state/actions';
 
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
+import 'react-toastify/dist/ReactToastify.css';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 import useForm from '../utils/hooks/useForm';
@@ -48,12 +49,13 @@ const SubmitStory = ({ addStory, requestToggle, resolved, error }) => {
             openAlert();
         } else if(error.status) {
             handleAPIResponse();
-            toast.error("Oops, something went wrong");
+            console.log(toast);
+            toast.error("Oops, something went wrong. Try again!");
         }
     }, [resolved, error]) // eslint-disable-line
 
     return (
-        <>
+        <>  
             <Header 
                 height="60vh"
                 title="Submit Story Page :)"  
@@ -172,7 +174,7 @@ const StyledContainer = styled.main`
 
         button.submit-btn {
             outline: 0;
-            background: ${props => props.theme.primaryDarkGrey}
+            background: ${props => props.theme.primaryDarkGrey};
             border: none;
             color: ${props => props.theme.white};
             font-weight: 700;

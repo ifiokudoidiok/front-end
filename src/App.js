@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { theme } from './styles/theme.styles';
 import { GlobalStyles } from './styles/global.styles';
 import { ThemeProvider } from 'styled-components';
+import { ToastContainer } from 'react-toastify';
 import WebsiteLayout from './components/Layout/WebsiteLayout';
 import OnboardingLayout from './components/Layout/OnboardingLayout';
 import DashboardLayout from './components/Layout/DashboardLayout';
@@ -20,6 +21,7 @@ const App = () => {
           <WebsiteLayout />
           <OnboardingLayout />
           <DashboardLayout />
+          <ToastContainer />
         </ThemeProvider>
       </BrowserRouter>
     </Provider>
