@@ -1,22 +1,47 @@
 import React from "react";
 import styled from 'styled-components';
-import Header from '../components/Website/Header';
+import Slider from '../components/Website/Slider';
+import Navigation from "../components/Website/Navigation";
 
+const images = [
+    "https://source.unsplash.com/1600x900/?refugees,refugee",
+    "https://source.unsplash.com/1600x900/?refugees,refugee",
+    "https://source.unsplash.com/1600x900/?refugees,refugee",
+    "https://source.unsplash.com/1600x900/?refugees,refugee",
+    "https://source.unsplash.com/1600x900/?refugees,refugee"
+];
 
 const Home = () => (
     <ParallaxContainer>
-        <Header 
-            height="100vh"
-            title="Home Page :)"  
-            description="Welcome to the home page. I sure i'm glad that you're here"
-        />
+        <header className="is-home-page">
+            <Navigation />
+            <Slider
+                options={{
+                    autoPlay: 4000,
+                    lazyLoad: true,
+                    pauseAutoPlayOnHover: false,
+                    wrapAround: true,
+                    pageDots: false,
+                    prevNextButtons: false
+                }}
+            >
+                {
+                    images.map((image, index) => (
+                        <div style={{ width: '100%', height: '100%' }} key={index}>
+                            <img src={image} data-flickity-lazyload={image} alt="" />
+                        </div>
+                    ))
+                }
+            </Slider>
+        </header>
         <main>
-            <h1>Home Page</h1>
+            <h1>Hello World!</h1>
         </main>
     </ParallaxContainer>
 );
 
 export default Home;
+
 
 const ParallaxContainer = styled.div`
     height: 100vh;
@@ -26,17 +51,21 @@ const ParallaxContainer = styled.div`
     perspective-origin: center top;
     transform-style: preserve-3d;
 
-    header {
+    header.is-home-page {
         width: 100vw;
-        background: none;
-        background-size: cover;
-        background-position: center center;
-        position: relative;
-        vertical-align: top;
         transform-origin: center top;
         transform: 
             translateZ(-1px) 
             scale(2);
+
+        nav {
+            z-index: 3;
+            padding: 2rem calc((100vw - 1140px)/2);
+    
+            @media (max-width: 1140px) {
+                padding: 2rem;
+            }
+        }
     }
 
     main {

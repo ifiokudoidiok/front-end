@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Flickity from 'flickity';
+import styled from 'styled-components';
 import 'flickity/dist/flickity.min.css';
+
 
 export default class Slider extends React.Component {
     constructor(props) {
@@ -10,7 +12,7 @@ export default class Slider extends React.Component {
         this.state = {
             flickityReady: false,
         };
-        
+
         this.refreshFlickity = this.refreshFlickity.bind(this);
     }
 
@@ -28,9 +30,6 @@ export default class Slider extends React.Component {
         this.flickity.updateDraggable();
     }
 
-    componentWillUnmount() {
-        this.flickity.destroy();
-    }
 
     componentDidUpdate(prevProps, prevState) {
         const flickityDidBecomeActive = !prevState.flickityReady && this.state.flickityReady;
@@ -45,7 +44,9 @@ export default class Slider extends React.Component {
         if (!this.flickityNode) {
             return null;
         }
+
         const mountNode = this.flickityNode.querySelector('.flickity-slider');
+
         if (mountNode) {
             return ReactDOM.createPortal(this.props.children, mountNode);
         }
@@ -53,8 +54,16 @@ export default class Slider extends React.Component {
 
     render() {
         return [
-            <div className={'test'} key="flickityBase" ref={node => (this.flickityNode = node)} />,
+            <StyledSlider className={'test'} key="flickityBase" ref={node => (this.flickityNode = node)} />,
             this.renderPortal(),
         ].filter(Boolean);
     }
 }
+
+const StyledSlider = styled.div`
+    height: 100vh;
+
+    .flickity-viewport {
+        height: 100vh !important;
+    }
+`
