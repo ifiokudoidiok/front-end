@@ -5,6 +5,12 @@ import withAuth from '../../utils/axios';
 
 axios.defaults.baseURL = 'https://bw-refugee-stories.herokuapp.com/';
 
+export const requestToggle = (bool) => {
+    return {
+        type: types.REQUEST_TOGGLE, 
+        payload: bool
+    }
+}
 
 export const getUserStories = () => dispatch => {
     axios.get('/api/stories')
@@ -35,13 +41,13 @@ export const addStory = (story) => dispatch => {
                 type: types.ADD_A_STORY
             });
             dispatch({
-                type: types.REQUEST_WAS_RESOLVED, 
+                type: types.REQUEST_TOGGLE, 
                 payload: true
             })
         })
         .catch(error => {
             dispatch({
-                type: types.REQUEST_ENDED_IN_ERROR, 
+                type: types.ERROR_TOGGLE, 
                 payload: {
                     status: true,
                     message: error

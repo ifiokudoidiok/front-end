@@ -4,7 +4,7 @@ import * as types from '../types';
 const initialResolvedState = false;
 export const resolvedReducer = (state = initialResolvedState, actions) => {
     switch(actions.type) {
-        case types.REQUEST_WAS_RESOLVED:
+        case types.REQUEST_TOGGLE:
             return actions.payload;
         default:
             return state
@@ -17,7 +17,7 @@ const initialErrorState = {
 };
 export const errorReducer = (state = initialErrorState, actions) => {
     switch(actions.type) {
-        case types.REQUEST_ENDED_IN_ERROR:
+        case types.ERROR_TOGGLE:
             return {
                 status: actions.payload.status,
                 message: actions.payload.message

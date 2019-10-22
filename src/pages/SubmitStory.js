@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from 'react-redux';
 import * as actions from '../state/actions';
 
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
@@ -14,11 +15,10 @@ import AlertDialog from '../components/Modal/AlertDialog';
 
 
 
-const SubmitStory = ({ addStory, resolved, error }) => {
+const SubmitStory = ({ addStory, requestToggle, resolved, error }) => {
 
     const handleStorySubmit = () => {
         startLoader();
-        markAsSubmitted();
         addStory(values);
     }
 
@@ -26,16 +26,15 @@ const SubmitStory = ({ addStory, resolved, error }) => {
         stopLoader();
         resetForm();
         makeBtnNotVisible();
+        requestToggle(false);
     }
 
-    const [ isSubmitted, markAsSubmitted ] = useDialog(false);
     const [ isLoading, startLoader, stopLoader ] = useDialog(false);
     const [ isAlertOpen, openAlert, closeAlert ] = useDialog(false);
     const [ isBtnVisible, makeBtnVisible, makeBtnNotVisible ] = useDialog(false);
     const { values, resetForm, handleChange, handleSubmit } = useForm(handleStorySubmit);
 
     const { title, story } = values;
-
 
     useEffect(() => {
         if(title && story) {
@@ -44,11 +43,12 @@ const SubmitStory = ({ addStory, resolved, error }) => {
     }, [title, story]) // eslint-disable-line
 
     useEffect(() => {
-        if(resolved & isSubmitted) { 
+        if(resolved) { 
             handleAPIResponse();
             openAlert();
-        } else if(error.status & isSubmitted) {
+        } else if(error.status) {
             handleAPIResponse();
+            toast.error("Oops, something went wrong");
         }
     }, [resolved, error]) // eslint-disable-line
 
