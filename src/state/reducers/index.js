@@ -1,4 +1,4 @@
-import {userStoriesReducer, pendingStoriesReducer } from './stories';
+import { userStoriesReducer, pendingStoriesReducer } from './stories';
 import { resolvedReducer, errorReducer } from './responses';
 import { combineReducers } from 'redux'
 

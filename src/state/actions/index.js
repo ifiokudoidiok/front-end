@@ -5,22 +5,6 @@ import withAuth from '../../utils/axios';
 
 axios.defaults.baseURL = 'https://bw-refugee-stories.herokuapp.com/';
 
-export const requestResolved = () => {
-    return {
-        type: types.REQUEST_WAS_RESOLVED, 
-        payload: true
-    }
-}
-
-export const requestEndedInError = (error) => {
-    return {
-        type: types.REQUEST_ENDED_IN_ERROR, 
-        payload: {
-            status: true,
-            message: error
-        }
-    }
-}
 
 export const getUserStories = () => dispatch => {
     axios.get('/api/stories')
@@ -44,19 +28,31 @@ export const getPendingStories = () => dispatch => {
         .catch(error => console.log(error))
 }
 
-export const addStory = (story) => dispatch => {
-    axios.post('/api/stories', story)
+export const addStory = (story) => async dispatch => {
+    requestResolved();
+
+    await axios.post('/api/stories', story)
         .then(res => {
             dispatch({
                 type: types.ADD_A_STORY
             });
-            requestResolved();
+            dispatch({
+                type: types.REQUEST_WAS_RESOLVED, 
+                payload: true
+            })
             console.log(res)
         })
         .catch(error => {
-            requestEndedInError(error);
+            dispatch({
+                type: types.REQUEST_ENDED_IN_ERROR, 
+                payload: {
+                    status: true,
+                    message: error
+                }
+            })
         })
 }
+  
 
 export const approveStory = (id, story) => dispatch => {
     withAuth().post(` /api/admin/stories/approve/${id}`, story)

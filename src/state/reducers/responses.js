@@ -1,7 +1,9 @@
 import * as types from '../types';
 
+
 const initialResolvedState = false;
 export const resolvedReducer = (state = initialResolvedState, actions) => {
+    console.log(actions);
     switch(actions.type) {
         case types.REQUEST_WAS_RESOLVED:
             console.log('resolved');
