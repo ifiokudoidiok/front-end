@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Navigation from './Navigation';
 
-const Header = ({ height, title, description }) => {
+
+const Header = ({ height, title, story }) => {
     return (
         <StyledHeader height={height}>
             <div className="hero-background">
@@ -12,7 +13,7 @@ const Header = ({ height, title, description }) => {
                 <Navigation />
 
                 <h1>{title}</h1>
-                <p>{description}</p>
+                <p>{story}</p>
             </div>
         </StyledHeader>
     )

@@ -21,13 +21,13 @@ export const GlobalStyles = createGlobalStyle`
         list-style-type: none;
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1, h2, h3, h4, h5, h6, a {
         font-weight: 600;
+        font-family: 'Source Serif Pro', serif;
     }
 
     a {
         text-decoration: none;
-        font-weight: 600;
     }
 
     img {

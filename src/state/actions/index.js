@@ -1,8 +1,26 @@
+import axios from 'axios';
 import * as types from '../types';
 import withAuth from '../../utils/axios';
 
 
 axios.defaults.baseURL = 'https://bw-refugee-stories.herokuapp.com/';
+
+export const requestResolved = () => {
+    return {
+        type: types.REQUEST_WAS_RESOLVED, 
+        payload: true
+    }
+}
+
+export const requestEndedInError = (error) => {
+    return {
+        type: types.REQUEST_ENDED_IN_ERROR, 
+        payload: {
+            status: true,
+            message: error
+        }
+    }
+}
 
 export const getUserStories = () => dispatch => {
     axios.get('/api/stories')
@@ -32,8 +50,12 @@ export const addStory = (story) => dispatch => {
             dispatch({
                 type: types.ADD_A_STORY
             });
+            requestResolved();
+            console.log(res)
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            requestEndedInError(error);
+        })
 }
 
 export const approveStory = (id, story) => dispatch => {
