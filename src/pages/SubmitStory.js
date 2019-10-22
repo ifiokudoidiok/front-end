@@ -10,7 +10,6 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import useForm from '../utils/hooks/useForm';
 import useDialog from '../utils/hooks/useDialog';
 
-import Header from '../components/Website/Header';
 import Roller from '../components/LoadingIndicator/roller';
 import AlertDialog from '../components/Modal/AlertDialog';
 import Navigation from "../components/Website/Navigation";

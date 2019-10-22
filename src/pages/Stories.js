@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux"
 import * as actions from '../state/actions';
 
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../components/Website/Header';
 
@@ -25,8 +26,14 @@ const Stories = ({ getUserStories, userStories }) => {
                         userStories.map(({id, title, story}) => {
                             return (
                                 <li key={id}>
-                                    <h3>{title}</h3>
-                                    <p>{story}</p>
+                                    <div className="card-content">
+                                        <h3>{title}</h3>
+                                        <p>{`${story.split(" ").splice(0, 15).join(" ")}...`}</p>
+                                        <Link to={`/stories/${id}`}>Read full story <span>&#62;</span></Link>
+                                    </div>
+                                    <div className="card-image">
+                                        <img src="https://source.unsplash.com/1600x900/?person" alt="Randomized refugee resource from Unsplash" />
+                                    </div>
                                 </li>
                             )
                         })
@@ -43,4 +50,109 @@ const StyledContainer = styled.main`
     max-width: ${props => props.theme.mediumMaxWidth};
     margin: 0 auto;
     padding: ${props => props.theme.containerWrap};
+    width: 85vw;
+
+    li {
+        margin-bottom: 5rem;
+        min-height: 300px;
+        display: flex;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+
+        &:nth-of-type(2n) {
+            flex-direction: row-reverse;
+
+            .card-image img {
+                border-top-left-radius: 5px;
+                border-top-right-radius: 0;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 0;
+            }
+        }
+
+        .card-content,
+        .card-image {
+            min-height: 300px;
+            width: 50%;
+            position: relative;
+
+            img {
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 100%;
+                position: absolute;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+        }
+
+        .card-image {
+            background: ${props => props.theme.primaryDarkGrey}; 
+        }
+
+        .card-content {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            h3 {
+                font-size: 2.5rem;
+            }
+
+            p {
+                font-size: 1.6rem;
+                margin-top: 1rem;
+            }
+
+            a {
+                font-size: 1.4rem;
+                margin-top: 2rem;
+                color: ${props => props.theme.primaryColor};
+                width: fit-content;
+                display: inline-block;
+                border-bottom: 3px solid transparent;
+
+                &:hover {
+                    border-bottom: 3px solid ${props => props.theme.primaryColor};
+                }
+            }
+        }
+
+        @media (max-width: 768px) {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+
+            .card-content,
+            .card-image {
+                width: 100%;
+
+                img {
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 0;
+                    border-bottom-left-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                }
+            }
+
+            &:nth-of-type(2n) {
+                flex-direction: column;
+
+                .card-image img {
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 0;
+                    border-bottom-left-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                }
+            }
+    }
 `

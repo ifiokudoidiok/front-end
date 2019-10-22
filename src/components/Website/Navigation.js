@@ -99,7 +99,7 @@ const StyledNavigation = styled.nav`
             &.open {
                 display: flex;
                 position: absolute;
-                background: rgba(0, 0, 0, .9);
+                background: ${props => props.theme.primaryGrey};
                 flex-direction: column;
                 top: 60px;
                 right: 0;
@@ -114,7 +114,7 @@ const StyledNavigation = styled.nav`
                     border: solid 15px transparent;
                     border-top: solid 0px transparent;
                     border-width: 14px;
-                    border-color: rgba(0, 0, 0, .9) transparent transparent transparent;
+                    border-color: ${props => props.theme.primaryGrey} transparent transparent transparent;
                     right: .8rem;
                     transform: rotate(180deg);
                     top: -28px;
@@ -126,9 +126,9 @@ const StyledNavigation = styled.nav`
     
                     a {
                         width: 100%;
-                        color: rgba(255, 255, 255, .7);
+                        color: ${props => props.theme.white};
                         padding: 1.5rem 0 .75rem;
-                        border-bottom: 1px solid rgba(255, 255, 255, .7);
+                        border-bottom: 1px solid ${props => props.theme.white};
     
                         &.selected {
                             border-bottom: 1px solid ${props => props.theme.primaryColor};
