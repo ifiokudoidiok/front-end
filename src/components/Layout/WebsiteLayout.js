@@ -8,4 +8,4 @@ const WebsiteLayout = () => (
     </>
 );
 
-export default WebsiteLayout
+export default WebsiteLayout;

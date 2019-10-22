@@ -1,8 +1,16 @@
+import axios from 'axios';
 import * as types from '../types';
 import withAuth from '../../utils/axios';
 
 
 axios.defaults.baseURL = 'https://bw-refugee-stories.herokuapp.com/';
+
+export const requestToggle = (bool) => {
+    return {
+        type: types.REQUEST_TOGGLE, 
+        payload: bool
+    }
+}
 
 export const getUserStories = () => dispatch => {
     axios.get('/api/stories')
@@ -32,9 +40,22 @@ export const addStory = (story) => dispatch => {
             dispatch({
                 type: types.ADD_A_STORY
             });
+            dispatch({
+                type: types.REQUEST_TOGGLE, 
+                payload: true
+            })
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            dispatch({
+                type: types.ERROR_TOGGLE, 
+                payload: {
+                    status: true,
+                    message: error
+                }
+            })
+        })
 }
+  
 
 export const approveStory = (id, story) => dispatch => {
     withAuth().post(` /api/admin/stories/approve/${id}`, story)
