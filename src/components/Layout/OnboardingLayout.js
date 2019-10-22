@@ -4,7 +4,12 @@ import OnboardingRouter from '../Router/OnboardingRouter';
 
 const OnboardingLayout = () => (
     <>
-        <OnboardingRouter />
+        <div>
+            {/* logo */}
+            {/* description */}
+            <OnboardingRouter />
+        </div>
+        <div>{/* Image/Slider */}</div>
     </>
 );
 
