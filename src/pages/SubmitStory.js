@@ -13,6 +13,7 @@ import useDialog from '../utils/hooks/useDialog';
 import Header from '../components/Website/Header';
 import Roller from '../components/LoadingIndicator/roller';
 import AlertDialog from '../components/Modal/AlertDialog';
+import Navigation from "../components/Website/Navigation";
 
 
 
@@ -39,7 +40,9 @@ const SubmitStory = ({ addStory, requestToggle, resolved, error }) => {
 
     useEffect(() => {
         if(title && story) {
-            makeBtnVisible()
+            makeBtnVisible();
+        } else {
+            makeBtnNotVisible();
         }
     }, [title, story]) // eslint-disable-line
 
@@ -55,63 +58,58 @@ const SubmitStory = ({ addStory, requestToggle, resolved, error }) => {
     }, [resolved, error]) // eslint-disable-line
 
     return (
-        <>  
-            <Header 
-                height="60vh"
-                title="Submit Story Page :)"  
-                story="Welcome to the submit story page. I sure i'm glad that you're here"
+        <StyledContainer> 
+            <Navigation noheader />
+            
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="title">
+                    <span className="sr">Title</span>
+                    <input id="title" type="text" value={title || ''} placeholder="Title" onChange={handleChange} autoFocus required />
+                </label>
+
+                <label htmlFor="story">
+                    <span className="sr">story</span>
+                    <TextareaAutosize id="story" value={story || ''} placeholder="Tell your story..." onChange={handleChange} required />
+                </label>
+
+                {   
+                    isBtnVisible &&
+                        <button type="submit" className={`submit-btn ${isLoading && "is-active"}`}>
+                            {isLoading ? <Roller /> : 'Submit Story'}
+                        </button>
+                }
+            </form>
+            <AlertDialog 
+                open={isAlertOpen}
+                handleClose={closeAlert}
+                title='Story Submitted'
+                description="Your story was submitted successfully. Please wait a few hours for confirmation of approval!"
+                dialogActions={[
+                    {
+                        id: 1,
+                        text: "Go to home",
+                        route: "/"
+                    },
+                    {
+                        id: 2,
+                        text: "Submit new story",
+                        route: "/submit-story"
+                    },
+                ]}
             />
-            <StyledContainer>
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="title">
-                        <span className="sr">Title</span>
-                        <input id="title" type="text" value={title || ''} placeholder="Title" onChange={handleChange} autoFocus required />
-                    </label>
-
-                    <label htmlFor="story">
-                        <span className="sr">story</span>
-                        <TextareaAutosize id="story" value={story || ''} placeholder="Tell your story..." onChange={handleChange} required />
-                    </label>
-
-                    {   
-                        isBtnVisible &&
-                            <button type="submit" className={`submit-btn ${isLoading && "is-active"}`}>
-                                {isLoading ? <Roller /> : 'Submit Story'}
-                            </button>
-                    }
-                </form>
-                <AlertDialog 
-                    open={isAlertOpen}
-                    handleClose={closeAlert}
-                    title='Story Submitted'
-                    description="Your story was submitted successfully. Please wait a few hours for confirmation of approval!"
-                    dialogActions={[
-                        {
-                            id: 1,
-                            text: "Go to home",
-                            route: "/"
-                        },
-                        {
-                            id: 2,
-                            text: "Submit new story",
-                            route: "/submit-story"
-                        },
-                    ]}
-                />
-            </StyledContainer>
-        </>
+        </StyledContainer>
     )
 };
 
 export default connect(state => state, actions)(SubmitStory);
 
 const StyledContainer = styled.main`
-    width: 90vw;
-    max-width: ${props => props.theme.mediumMaxWidth};
-    margin: 0 auto;
-    padding: ${props => props.theme.containerWrap};
+    padding: 2rem;
 
     form {
+        max-width: ${props => props.theme.mediumMaxWidth};
+        margin: 4rem auto 0;
+
         label {
             display: flex;
             flex-direction: column;

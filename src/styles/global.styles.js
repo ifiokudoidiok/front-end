@@ -15,6 +15,7 @@ export const GlobalStyles = createGlobalStyle`
     body {
         font-family: ${props => props.theme.bodyFont};
         font-weight: 400;
+        overflow-x: hidden;
         color: ${props => props.theme.primaryBlack};
     }
 

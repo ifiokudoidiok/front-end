@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import logo from '../../assets/images/refugeestories-logo.png';
 
 
-const Navigation = () => {
+const Navigation = ({ noheader }) => {
 
     const [ isOpen, setIsOpen ] = useState(false);
 
@@ -13,7 +13,7 @@ const Navigation = () => {
     }
 
     return (
-        <StyledNavigation>
+        <StyledNavigation className={noheader ? 'no-header' : null}>
             <div className="site-logo">
                 <img src={logo} alt="Refugee Stories Logo" />
             </div>
@@ -47,7 +47,21 @@ const StyledNavigation = styled.nav`
     width: 100%;
     position: absolute;
     top: 0;
-    color: #fff;
+    color: ${props => props.theme.white};
+
+    &.no-header {
+        max-width: ${props => props.theme.largeMaxWidth};
+        margin: 0 auto;
+        position: relative;
+
+        a {
+            color: ${props => props.theme.black};
+        }
+
+        .responsive-nav span {
+            background: ${props => props.theme.black};
+        }
+    }
 
     .site-logo {
         max-width: 50px;
@@ -75,9 +89,7 @@ const StyledNavigation = styled.nav`
             }
 
             &:last-of-type {
-                a {
-                    padding-right: 0;
-                }
+                padding-right: 0;
             }
         }
 
@@ -160,7 +172,7 @@ const StyledNavigation = styled.nav`
             position: absolute;
             height: 2.5px;
             width: 50%;
-            background: #fff;
+            background: ${props => props.theme.white};
             opacity: 1;
             -webkit-transform: rotate(0deg);
             -moz-transform: rotate(0deg);
