@@ -13,8 +13,9 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     body {
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: ${props => props.theme.bodyFont};
         font-weight: 400;
+        color: ${props => props.theme.primaryBlack};
     }
 
     ul {
@@ -23,7 +24,7 @@ export const GlobalStyles = createGlobalStyle`
 
     h1, h2, h3, h4, h5, h6, a {
         font-weight: 600;
-        font-family: 'Source Serif Pro', serif;
+        font-family: ${props => props.theme.headingFont};
     }
 
     a {
@@ -34,5 +35,50 @@ export const GlobalStyles = createGlobalStyle`
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+
+    .Alert-dialog {
+        a {
+            font-family: ${props => props.theme.bodyFont};
+            color: ${props => props.theme.primaryColor};
+        }
+
+        
+        .MuiDialog-paperWidthSm {
+            max-width: 400px;
+        }
+
+        .MuiBackdrop-root {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .MuiTypography-h6 {
+            font-size: 2.4rem;
+            font-family: ${props => props.theme.headingFont};
+            font-weight: 600;
+            line-height: 1.6;
+            letter-spacing: 0.0075em;
+        }
+
+        .MuiDialogTitle-root {
+            padding-bottom: 0;
+        }
+
+        .MuiTypography-body1 {
+            font-size: 1.5rem;
+            font-family: ${props => props.theme.bodyFont};
+        }
+
+        .MuiButton-root {
+            font-size: 1.2rem;
+        }
+
+        .MuiButton-textPrimary:hover {
+            background-color: ${props => props.theme.hoverBG};
+        }
+
+        .MuiButton-text {
+            padding: 6px 10px 5px;
+        }
     }
 `

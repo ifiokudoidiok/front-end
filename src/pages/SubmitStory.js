@@ -73,7 +73,7 @@ const SubmitStory = ({ addStory, requestToggle, resolved, error }) => {
 
                     {   
                         isBtnVisible &&
-                            <button type="submit" className="submit-btn">
+                            <button type="submit" className={`submit-btn ${isLoading && "is-active"}`}>
                                 {isLoading ? <Roller /> : 'Submit Story'}
                             </button>
                     }
@@ -105,7 +105,7 @@ export default connect(state => state, actions)(SubmitStory);
 
 const StyledContainer = styled.main`
     width: 90vw;
-    max-width: 768px;
+    max-width: ${props => props.theme.mediumMaxWidth};
     margin: 8rem auto 3rem;
 
     form {
@@ -129,19 +129,19 @@ const StyledContainer = styled.main`
 
                 &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
                     font-size: 40px;
-                    color: #b3b3b1;
+                    color: ${props => props.theme.primaryGrey};
                 }
                 &::-moz-placeholder { /* Firefox 19+ */
                     font-size: 40px;
-                    color: #b3b3b1;
+                    color: ${props => props.theme.primaryGrey};
                 }
                 &:-ms-input-placeholder { /* IE 10+ */
                     font-size: 40px;
-                    color: #b3b3b1;
+                    color: ${props => props.theme.primaryGrey};
                 }
                 &:-moz-placeholder { /* Firefox 18- */
                     font-size: 40px;
-                    color: #b3b3b1;
+                    color: ${props => props.theme.primaryGrey};
                 }
             }
 
@@ -171,9 +171,9 @@ const StyledContainer = styled.main`
 
         button.submit-btn {
             outline: 0;
+            background: ${props => props.theme.primaryDarkGrey}
             border: none;
-            background: #ff5633 none;
-            color: #fff;
+            color: ${props => props.theme.white};
             font-weight: 700;
             text-align: center;
             border-radius: 5px;
@@ -186,8 +186,12 @@ const StyledContainer = styled.main`
             min-width: 150px;
             font-size: 1.5rem; 
 
+            &.is-active {
+                background-color: ${props => props.theme.primaryColor};
+            }
+
             &:hover {
-                background-color: #63ADB1;
+                background-color: ${props => props.theme.primaryColor};
                 background-image: none;
                 -webkit-box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34,36,38,.15) inset;
                 box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34,36,38,.15) inset;

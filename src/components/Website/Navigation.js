@@ -65,12 +65,12 @@ const StyledNavigation = styled.nav`
                 display: block;
 
                 &:hover {
-                    color: #ff5633;
+                    color: ${props => props.theme.primaryColor};
                 }
     
                 &.selected {
-                    border-bottom: 2px solid #ff5633;
-                    color: #ff5633;
+                    border-bottom: 2px solid ${props => props.theme.primaryColor};
+                    color: ${props => props.theme.primaryColor};
                 }
             }
 
@@ -119,12 +119,12 @@ const StyledNavigation = styled.nav`
                         border-bottom: 1px solid rgba(255, 255, 255, .7);
     
                         &.selected {
-                            border-bottom: 1px solid #ff5633;
-                            color: #ff5633;
+                            border-bottom: 1px solid ${props => props.theme.primaryColor};
+                            color: ${props => props.theme.primaryColor};
                         }
     
                         &:hover {
-                            color: #ff5633;
+                            color: ${props => props.theme.primaryColor};
                         }
                     }
     
@@ -196,7 +196,7 @@ const StyledNavigation = styled.nav`
 
         &.open {
             span {
-                background: #ff5633;
+                background: ${props => props.theme.primaryColor};
 
                 &:nth-child(1), &:nth-child(6) {
                     -webkit-transform: rotate(45deg);

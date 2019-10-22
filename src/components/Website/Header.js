@@ -55,7 +55,7 @@ const StyledHeader = styled.header`
     .hero-content {
         position: relative;
         z-index: 2;
-        max-width: 1140px;
+        max-width: ${props => props.theme.largeMaxWidth};
         width: 100%;
         height: 100%;
         max-height: 75vh
