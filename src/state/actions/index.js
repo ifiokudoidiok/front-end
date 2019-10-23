@@ -3,7 +3,7 @@ import * as types from '../types';
 import withAuth from '../../utils/axios';
 
 
-axios.defaults.baseURL = 'https://bw-refugee-stories.herokuapp.com/';
+axios.defaults.baseURL = 'https://bwrefugeestories.herokuapp.com/';
 
 export const requestToggle = (bool) => {
     return {
@@ -31,7 +31,7 @@ export const getPendingStories = () => dispatch => {
                 payload: response.data
             });
         })
-        .catch(error => console.log(error))
+        .catch(error => console.log(error.message))
 }
 
 export const addStory = (story) => dispatch => {
@@ -58,8 +58,10 @@ export const addStory = (story) => dispatch => {
   
 
 export const approveStory = (id, story) => dispatch => {
-    withAuth().post(` /api/admin/stories/approve/${id}`, story)
+    console.log('calling Approve story..')
+    withAuth().post(`/api/admin/stories/approve/${id}`, story)
         .then(res => {
+            console.log('Approved!')
             dispatch({
                 type: types.APPROVE_STORY
             });
@@ -68,7 +70,8 @@ export const approveStory = (id, story) => dispatch => {
 }
 
 export const rejectStory = (id) => dispatch => {
-    withAuth().delete(` /api/admin/stories/reject/${id}`)
+    console.log('calling reject..')
+    axios.delete(`/api/admin/stories/reject/${id}`)
         .then(res => {
             dispatch({
                 type: types.REJECT_STORY
@@ -78,7 +81,8 @@ export const rejectStory = (id) => dispatch => {
 }
 
 export const deleteStory = (id) => dispatch => {
-    withAuth().delete(` /api/admin/stories/delete/${id}`)
+    console.log('calling delete...')
+    withAuth().delete(`/api/admin/stories/delete/${id}`)
         .then(res => {
             dispatch({
                 type: types.DELETE_STORY

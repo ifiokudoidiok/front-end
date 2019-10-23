@@ -17,7 +17,7 @@ const initialPendingStories = [];
 export const pendingStoriesReducer = (state = initialPendingStories, actions) => {
     switch(actions.type) {
         case types.GET_PENDING_STORIES:
-            return state;
+            return actions.payload;
         case types.ADD_A_STORY:
             return state;
         case types.APPROVE_STORY:
