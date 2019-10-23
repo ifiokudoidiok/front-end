@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux"
 import * as actions from '../state/actions';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { imageBank } from "../utils/data";
@@ -11,9 +12,18 @@ import Roller from "../components/LoadingIndicator/roller";
 
 const Stories = ({ getUserStories, userStories, userStoriesStatus }) => {
 
+    const [ isLoading, setLoader ] = useState(true);
+
     useEffect(() => {
         getUserStories();
     }, [userStories]) // eslint-disable-line
+
+    useEffect(() => {
+        if(userStoriesStatus === false && isLoading) {
+            toast.error("Oops, something went wrong. Try again!");
+            setLoader(false);
+        }
+    }, [userStoriesStatus, isLoading])
 
     return (
         <>
@@ -25,7 +35,7 @@ const Stories = ({ getUserStories, userStories, userStoriesStatus }) => {
             />
             <StyledContainer>
                 {   
-                    !userStoriesStatus ? (
+                    !userStoriesStatus && isLoading ? (
                         <div className="loading-indicator">
                             <Roller isSiteWide={true} />
                         </div>
