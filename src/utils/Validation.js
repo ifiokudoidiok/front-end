@@ -24,17 +24,5 @@ export const validation = ({ email, password }) => {
             if(password)
                 return !(/[0-9]/.test(password));
         })(),
-        lowerCaseRequired: (() => {
-            if(password)
-                return !(/[a-z]/.test(password));
-        })(),
-        upperCaseRequired: (() => {
-            if(password)
-                return !(/[A-Z]/.test(password));
-        })(),
-        specialCharRequired: (() => {
-            if(password)
-                return !(/[\!\@\#\$\%\^\&\*]/.test(password)); //eslint-disable-line
-        })()
     }
 };

@@ -1,38 +1,33 @@
 import React from "react";
 import styled from 'styled-components'
-import Roller from './rolerIndicator'
-import useForm from './useForm';
-import {validation, validationChecker } from './Validation';
+import Roller from '../utils/rolerIndicator'
+import useForm from '../utils/hooks/useForm';
+import axios from 'axios';
+import {validation, validationChecker } from '../utils/Validation';
 
 
-const Login = () => {
+const Login = (props) => {
 
-    const login = () => {
-        resetForm();
-    }
+    
+const adminLogin = () => {
+    console.log("submitting.....")
+axios.post('https://bwrefugeestories.herokuapp.com/api/auth/login', values)
+    .then(res => {
+        console.log("submitted!")
+        localStorage.setItem('token', res.data.token);
+        // resetForm();
+        props.history.push('/admin');
+    })
+    .catch(err=>{
+        console.log(err.message)
+    })
+}
 
-    const { 
-        values, 
-        errors, 
-        isLoading,
-        visibility,
-        handleChange, 
-        handleSubmit, 
-        resetForm,
-        toggleVisibility
-    } = useForm(login, validation);
+    const { values, errors, isLoading, visibility, handleChange, handleSubmit, resetForm, toggleVisibility
+    } = useForm(adminLogin, validation);
 
     const { email, password } = values;
-    const { 
-        initialEmailState, 
-        initialPasswordState,
-        emailMatch,
-        minMaxMatch,
-        numberRequired,
-        lowerCaseRequired,
-        upperCaseRequired,
-        specialCharRequired
-    } = errors;
+    const { initialEmailState, emailMatch, minMaxMatch, numberRequired,initialPasswordState } = errors;
 
     return (
         <StyledForm onSubmit={handleSubmit}>
@@ -40,7 +35,7 @@ const Login = () => {
                 <span>Email</span>
                 <input id="email" type="email" value={email || ''} onChange={handleChange} required />
                 <ul className="input-requirements">
-					<li className={validationChecker(initialEmailState, emailMatch)}>Contains valid email address</li>
+					<li className={validationChecker(initialEmailState, emailMatch)}>Contains valid email format</li>
                 </ul>
             </label>
 
@@ -49,14 +44,10 @@ const Login = () => {
                     <span>Password</span>
                     <button type="button" onClick={toggleVisibility}>{visibility ? 'Hide password' : 'Show password'}</button>
                 </span>
-                <input id="password" type={visibility ? 'text' : 'password'} pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,100}$" value={password || ''} onChange={handleChange} required />
-
+                <input id="password" type={visibility ? 'text' : 'password'} value={password || ''} onChange={handleChange} required />               
                 <ul className="input-requirements">
 					<li className={validationChecker(initialPasswordState, minMaxMatch)}>At least 6 characters long (and less than 100 characters)</li>
 					<li className={validationChecker(initialPasswordState, numberRequired)}>Contains at least 1 number</li>
-					<li className={validationChecker(initialPasswordState, lowerCaseRequired)}>Contains at least 1 lowercase letter</li>
-					<li className={validationChecker(initialPasswordState, upperCaseRequired)}>Contains at least 1 uppercase letter</li>
-					<li className={validationChecker(initialPasswordState, specialCharRequired)}>Contains a special character (e.g. @ !)</li>
 				</ul>
             </label>
             <button type="submit" className="submit-btn">
