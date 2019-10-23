@@ -102,6 +102,7 @@ export const deleteStory = (id) => dispatch => {
     console.log('calling delete...')
     withAuth().delete(`/api/admin/stories/delete/${id}`)
         .then(res => {
+            console.log("deleted!")
             dispatch({
                 type: types.DELETE_STORY
             });
