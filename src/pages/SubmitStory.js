@@ -54,7 +54,8 @@ const SubmitStory = ({ addStory, toggleAddStoryStatus, addStoryStatus }) => {
             setAsNotSubmitted();
         }
 
-        if(hasSubmitted && addStoryStatus === false) {
+        if(hasSubmitted && (addStoryStatus === false)) {
+            console.log(addStoryStatus)
             handleAPIResponse();
             toast.error("Oops, something went wrong. Try again!");
             setAsNotSubmitted();

@@ -57,7 +57,7 @@ export const addStory = (story) => dispatch => {
     axios.post('/api/stories', story)
         .then(res => {
             dispatch({
-                type: types.SUBMIT_STORY
+                type: types.SUBMIT_STORY,
             });
             dispatch({
                 type: types.SUBMIT_STORY_SUCCESS, 

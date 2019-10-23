@@ -11,18 +11,9 @@ import Roller from "../components/LoadingIndicator/roller";
 
 const Stories = ({ getUserStories, userStories, userStoriesStatus }) => {
 
-    const [ isThereUpdates, setUpdateBool ] = useState(false);
 
     useEffect(() => {
         getUserStories();
-    }, []) // eslint-disable-line
-
-    useEffect(() => {
-        if(isThereUpdates) getUserStories();
-    }, [isThereUpdates]) // eslint-disable-line
-
-    useEffect(() => {
-        setUpdateBool(true)
     }, [userStories]) // eslint-disable-line
 
     return (

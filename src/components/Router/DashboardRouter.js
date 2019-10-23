@@ -13,4 +13,4 @@ const DashboardRouter = () => (
     </>
 );
 
-export default DashboardRouter
+export default DashboardRouter;
