@@ -17,11 +17,10 @@ const initialPendingStories = [];
 export const pendingStoriesReducer = (state = initialPendingStories, actions) => {
     switch(actions.type) {
         case types.GET_PENDING_STORIES:
-            return state;
+            return actions.payload;
         case types.SUBMIT_STORY:
-            return state;
+            return actions.payload;
         case types.APPROVE_STORY:
-            return state;
         case types.REJECT_STORY:
             return state;
         default:
