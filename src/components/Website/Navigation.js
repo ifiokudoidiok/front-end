@@ -23,7 +23,7 @@ const Navigation = ({ noheader }) => {
                <li onClick={toggleNav}><NavLink activeClassName='selected' to="/submit-story">Submit Story</NavLink></li> 
                {
                     localStorage.getItem('token') && 
-                        <li onClick={toggleNav}><NavLink activeClassName='selected' to="/admin">My Dashboard</NavLink></li>  
+                        <li onClick={toggleNav}><NavLink activeClassName='selected' to="/dashboard">My Dashboard</NavLink></li>  
                }
             </ul>
             <button className={isOpen ? 'open responsive-nav' : 'responsive-nav'} onClick={toggleNav}>

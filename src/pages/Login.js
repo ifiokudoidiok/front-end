@@ -9,23 +9,16 @@ import {validation, validationChecker } from '../utils/Validation';
 const Login = (props) => {
 
     
-const adminLogin = () => {
-    console.log("submitting.....")
-axios.post('https://bwrefugeestories.herokuapp.com/api/auth/login', values)
-    .then(res => {
-        console.log("submitted!")
-        localStorage.setItem('token', res.data.token);
-        // resetForm();
-        props.history.push('/admin');
-    })
-    .catch(err=>{
-        console.log(err.message)
-    })
-}
+    const adminLogin = () => {
+        axios.post('https://bwrefugeestories.herokuapp.com/api/auth/login', values)
+            .then(res => {
+                localStorage.setItem('token', res.data.token);
+                props.history.push('/admin');
+            })
+            .catch(err=>{console.log(err.message)})
+    }
 
-    const { values, errors, isLoading, visibility, handleChange, handleSubmit, toggleVisibility
-    } = useForm(adminLogin, validation);
-
+    const { values, errors, isLoading, visibility, handleChange, handleSubmit, toggleVisibility } = useForm(adminLogin, validation);
     const { email, password } = values;
     const { initialEmailState, emailMatch, minMaxMatch, numberRequired,initialPasswordState } = errors;
 
