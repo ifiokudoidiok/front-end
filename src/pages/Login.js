@@ -30,7 +30,8 @@ axios.post('https://bwrefugeestories.herokuapp.com/api/auth/login', values)
     const { initialEmailState, emailMatch, minMaxMatch, numberRequired,initialPasswordState } = errors;
 
     return (
-        <StyledForm onSubmit={handleSubmit}>
+        <StyledDiv >
+        <form onSubmit={handleSubmit}>
             <label htmlFor="email">
                 <span>Email</span>
                 <input id="email" type="email" value={email || ''} onChange={handleChange} required />
@@ -53,20 +54,25 @@ axios.post('https://bwrefugeestories.herokuapp.com/api/auth/login', values)
             <button type="submit" className="submit-btn">
                 {isLoading ? <Roller /> : 'Submit'}
             </button>
-        </StyledForm>
+        </form>
+    </StyledDiv>
     )
 }
 
 export default Login;
 
 
-const StyledForm = styled.form`
-    background-color: #fff;
-    max-width: 600px;
-    margin: 10% auto;
-    padding: 3rem;
-    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.3);
-    border-bottom: 5px solid #ffdb3a;
+const StyledDiv = styled.div`
+    
+
+    form{
+        background-color: #fff;
+        max-width: 600px;
+        margin: 10% auto;
+        padding: 3rem;
+        box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.3);
+        border-bottom: 5px solid #ffdb3a;
+    }
     .input-requirements {
         font-size: 1rem;
         font-style: italic;

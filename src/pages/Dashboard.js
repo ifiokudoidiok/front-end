@@ -1,38 +1,37 @@
-
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import * as actions from '../state/actions/index';
 import styled from 'styled-components';
+import * as actions from '../state/actions/index';
 import avatar from '../utils/photo/avatar.png';
 
 
-
-
-const Dashboard = ({ pendingStories,  getPendingStories, approveStory}) => {
+const Dashboard = ({ pendingStories,  getPendingStories, approveStory, history }) => {
 
 	useEffect(
 		() => {
 			getPendingStories();
 		},
-		[getPendingStories ]
+		[pendingStories ]
     ); 
 
     const onLogout = () => {
         localStorage.clear();
-        // props.history.replace('/login');
-      };
+        history.replace('/login');
+    };
 
 	return (
 		<StyledContainer>
             <div className='adminSection'>
                 <div>
                     <img src={avatar} alt="Avatar" className="avatar" />
-                    <p><i>CLick to edit profile</i></p>
+                    <p><i> Welcome Admin-01</i></p>
+                    <p><i>CLick Here to edit profile</i></p>
                 </div>
                 <div className='admin-actions'>
-                    <p><Link to='/'><i>Main Page</i> </Link></p>
-                    <button className='logout' onClick={onLogout}>log-out</button>
+                    <p><Link to='/'><i>Home Page</i> </Link></p>
+                    <p><Link to='/approved-stories'><i>Approved Story Page</i> </Link></p>
+                    <button className='logout' onClick={onLogout}>Log-Out</button>
                 </div>
             </div>
             <div className='pendingSection'>
@@ -46,9 +45,10 @@ const Dashboard = ({ pendingStories,  getPendingStories, approveStory}) => {
                                 <button onClick={() => approveStory(person.id,{...person, highlight:null})}>Approve Story</button>
                             </div>
                         </div>
-                    );
-                })}
-            </div>			
+                        );
+                    })
+                }
+            </div>	            		
 		</StyledContainer>
 	);
 };
@@ -94,6 +94,11 @@ border: 2px solid gray
 
 }
 
+a:hover{
+    color:black;
+    font-size:18px;
+}
+
     .pendingSection{
         max-width:800px;
         width:100%;
@@ -101,33 +106,35 @@ border: 2px solid gray
         margin: 0 auto;
     }
 
-    .pendingCards{
+    .pendingCards {
         padding: 10px;
         margin-top: 5px;
         border-radius: 5px;
         box-shadow: 0 -1px 0 #e0e0e0, 0 0 2px rgba(0, 0, 0, 0.12),
             0 2px 4px rgba(0, 0, 0, 0.24);  
         background-color: #FFEBCD;
-        margin:10px 10px 30px 10px;
+        margin: 10px 10px 20px 10px;
     }
 
-    .btnDiv{
+    .btnDiv {
         display: flex;
-        justify-content:flex-end;
+        justify-content: flex-end;
     }
 
-    button{
+    button {
         margin:10px 5px 5px 5px;
         padding: 5px;
         border-radius:10px;
+        border: 1px solid gray;
         background-color:lightgray
     }
 
-    button:hover{
-        background-color: #90EE90
+    button:hover {
+        background-color: #90EE90;
+        font-size: 13.5px;
     }
 
-    .intro{
+    .intro {
         font-size: 3rem;
         text-shadow: 1px 1px 1px lightblue, 
         3px 3px 5px darkgray;

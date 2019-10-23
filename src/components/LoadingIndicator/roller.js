@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 
-const Roller = () => {
+const Roller = ({ isSiteWide }) => {
 
     return (
         <StyledRoller>
             <div className="lds-rolling">
-                <div></div>
+                <div className={isSiteWide ? "site-loader" : null}></div>
             </div>
         </StyledRoller>
     )
@@ -53,9 +53,16 @@ const StyledRoller = styled.div`
             position: absolute;
             width: 80px;
             height: 80px;
-            border: 10px solid #fff;
+            border: 10px solid ${props => props.theme.white};
             border-top-color: transparent;
             border-radius: 50%;
+        }
+
+        .site-loader {
+            width: 150px;
+            height: 150px;
+            border: 10px solid ${props => props.theme.black};
+            border-top-color: transparent;
         }
 
         div {

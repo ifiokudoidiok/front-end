@@ -5,7 +5,7 @@ const initialUserStories = [];
 export const userStoriesReducer = (state = initialUserStories, actions) => {
     switch(actions.type) {
         case types.GET_USER_STORIES:
-            return state;
+            return actions.payload;
         case types.DELETE_STORY:
             return state;
         default:
@@ -18,10 +18,10 @@ export const pendingStoriesReducer = (state = initialPendingStories, actions) =>
     switch(actions.type) {
         case types.GET_PENDING_STORIES:
             return actions.payload;
-        case types.ADD_A_STORY:
+        case types.SUBMIT_STORY:
+            console.log('Yhhh!')
             return state;
         case types.APPROVE_STORY:
-            return state;
         case types.REJECT_STORY:
             return state;
         default:

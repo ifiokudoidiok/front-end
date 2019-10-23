@@ -5,12 +5,20 @@ import withAuth from '../../utils/axios';
 
 axios.defaults.baseURL = 'https://bwrefugeestories.herokuapp.com/';
 
-export const requestToggle = (bool) => {
-    return {
-        type: types.REQUEST_TOGGLE, 
-        payload: bool
+export const toggleAddStoryStatus = (bool) => {
+    if(bool) {
+        return {
+            type: types.SUBMIT_STORY_SUCCESS, 
+            payload: bool
+        }
+    } else {
+        return {
+            type: types.SUBMIT_STORY_FAILED, 
+            payload: bool
+        }
     }
 }
+
 
 export const getUserStories = () => dispatch => {
     axios.get('/api/stories')
@@ -19,9 +27,19 @@ export const getUserStories = () => dispatch => {
                 type: types.GET_USER_STORIES, 
                 payload: response.data
             });
+            dispatch({
+                type: types.GET_USER_STORIES_SUCCESS, 
+                payload: true
+            })
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            dispatch({
+                type: types.GET_USER_STORIES_FAILED, 
+                payload: false
+            })
+        })
 }
+
 
 export const getPendingStories = () => dispatch => {
     withAuth().get('/api/admin/stories')
@@ -34,24 +52,22 @@ export const getPendingStories = () => dispatch => {
         .catch(error => console.log(error.message))
 }
 
+
 export const addStory = (story) => dispatch => {
     axios.post('/api/stories', story)
         .then(res => {
             dispatch({
-                type: types.ADD_A_STORY
+                type: types.SUBMIT_STORY,
             });
             dispatch({
-                type: types.REQUEST_TOGGLE, 
+                type: types.SUBMIT_STORY_SUCCESS, 
                 payload: true
             })
         })
         .catch(error => {
             dispatch({
-                type: types.ERROR_TOGGLE, 
-                payload: {
-                    status: true,
-                    message: error
-                }
+                type: types.SUBMIT_STORY_FAILED, 
+                payload: false
             })
         })
 }
@@ -69,6 +85,7 @@ export const approveStory = (id, story) => dispatch => {
         .catch(error => console.log(error))
 }
 
+
 export const rejectStory = (id) => dispatch => {
     console.log('calling reject..')
     axios.delete(`/api/admin/stories/reject/${id}`)
@@ -80,10 +97,12 @@ export const rejectStory = (id) => dispatch => {
         .catch(error => console.log(error))
 }
 
+
 export const deleteStory = (id) => dispatch => {
     console.log('calling delete...')
     withAuth().delete(`/api/admin/stories/delete/${id}`)
         .then(res => {
+            console.log("deleted!")
             dispatch({
                 type: types.DELETE_STORY
             });

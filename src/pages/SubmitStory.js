@@ -4,21 +4,23 @@ import * as actions from '../state/actions';
 
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
+import 'react-toastify/dist/ReactToastify.css';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 import useForm from '../utils/hooks/useForm';
 import useDialog from '../utils/hooks/useDialog';
 
-import Header from '../components/Website/Header';
 import Roller from '../components/LoadingIndicator/roller';
 import AlertDialog from '../components/Modal/AlertDialog';
+import Navigation from "../components/Website/Navigation";
 
 
 
-const SubmitStory = ({ addStory, requestToggle, resolved, error }) => {
+const SubmitStory = ({ addStory, toggleAddStoryStatus, addStoryStatus }) => {
 
     const handleStorySubmit = () => {
         startLoader();
+        setAsSubmitted();
         addStory(values);
     }
 
@@ -26,11 +28,12 @@ const SubmitStory = ({ addStory, requestToggle, resolved, error }) => {
         stopLoader();
         resetForm();
         makeBtnNotVisible();
-        requestToggle(false);
+        toggleAddStoryStatus(false);
     }
 
     const [ isLoading, startLoader, stopLoader ] = useDialog(false);
     const [ isAlertOpen, openAlert, closeAlert ] = useDialog(false);
+    const [ hasSubmitted, setAsSubmitted, setAsNotSubmitted ] = useDialog(false);
     const [ isBtnVisible, makeBtnVisible, makeBtnNotVisible ] = useDialog(false);
     const { values, resetForm, handleChange, handleSubmit } = useForm(handleStorySubmit);
 
@@ -38,77 +41,80 @@ const SubmitStory = ({ addStory, requestToggle, resolved, error }) => {
 
     useEffect(() => {
         if(title && story) {
-            makeBtnVisible()
+            makeBtnVisible();
+        } else {
+            makeBtnNotVisible();
         }
     }, [title, story]) // eslint-disable-line
 
     useEffect(() => {
-        if(resolved) { 
+        if(hasSubmitted && addStoryStatus) { 
             handleAPIResponse();
             openAlert();
-        } else if(error.status) {
-            handleAPIResponse();
-            toast.error("Oops, something went wrong");
+            setAsNotSubmitted();
         }
-    }, [resolved, error]) // eslint-disable-line
+
+        if(hasSubmitted && (addStoryStatus === false)) {
+            console.log(addStoryStatus)
+            handleAPIResponse();
+            toast.error("Oops, something went wrong. Try again!");
+            setAsNotSubmitted();
+        }
+    }, [addStoryStatus]) // eslint-disable-line
 
     return (
-        <>
-            <Header 
-                height="60vh"
-                title="Submit Story Page :)"  
-                story="Welcome to the submit story page. I sure i'm glad that you're here"
+        <StyledContainer> 
+            <Navigation noheader />
+            
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="title">
+                    <span className="sr">Title</span>
+                    <input id="title" type="text" value={title || ''} placeholder="Title" onChange={handleChange} autoFocus required />
+                </label>
+
+                <label htmlFor="story">
+                    <span className="sr">story</span>
+                    <TextareaAutosize id="story" value={story || ''} placeholder="Tell your story..." onChange={handleChange} required />
+                </label>
+
+                {   
+                    isBtnVisible &&
+                        <button type="submit" className={`submit-btn ${isLoading && "is-active"}`}>
+                            {isLoading ? <Roller /> : 'Submit Story'}
+                        </button>
+                }
+            </form>
+            <AlertDialog 
+                open={isAlertOpen}
+                handleClose={closeAlert}
+                title='Story Submitted'
+                description="Your story was submitted successfully. Please wait a few hours for confirmation of approval!"
+                dialogActions={[
+                    {
+                        id: 1,
+                        text: "Go to home",
+                        route: "/"
+                    },
+                    {
+                        id: 2,
+                        text: "Submit new story",
+                        route: "/submit-story"
+                    },
+                ]}
             />
-            <StyledContainer>
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="title">
-                        <span className="sr">Title</span>
-                        <input id="title" type="text" value={title || ''} placeholder="Title" onChange={handleChange} autoFocus required />
-                    </label>
-
-                    <label htmlFor="story">
-                        <span className="sr">story</span>
-                        <TextareaAutosize id="story" value={story || ''} placeholder="Tell your story..." onChange={handleChange} required />
-                    </label>
-
-                    {   
-                        isBtnVisible &&
-                            <button type="submit" className="submit-btn">
-                                {isLoading ? <Roller /> : 'Submit Story'}
-                            </button>
-                    }
-                </form>
-                <AlertDialog 
-                    open={isAlertOpen}
-                    handleClose={closeAlert}
-                    title='Story Submitted'
-                    description="Your story was submitted successfully. Please wait a few hours for confirmation of approval!"
-                    dialogActions={[
-                        {
-                            id: 1,
-                            text: "Go to home",
-                            route: "/"
-                        },
-                        {
-                            id: 2,
-                            text: "Submit new story",
-                            route: "/submit-story"
-                        },
-                    ]}
-                />
-            </StyledContainer>
-        </>
+        </StyledContainer>
     )
 };
 
 export default connect(state => state, actions)(SubmitStory);
 
 const StyledContainer = styled.main`
-    width: 90vw;
-    max-width: 768px;
-    margin: 8rem auto 3rem;
+    padding: 2rem;
 
     form {
+        max-width: ${props => props.theme.mediumMaxWidth};
+        margin: 4rem auto 0;
+
         label {
             display: flex;
             flex-direction: column;
@@ -129,19 +135,19 @@ const StyledContainer = styled.main`
 
                 &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
                     font-size: 40px;
-                    color: #b3b3b1;
+                    color: ${props => props.theme.primaryGrey};
                 }
                 &::-moz-placeholder { /* Firefox 19+ */
                     font-size: 40px;
-                    color: #b3b3b1;
+                    color: ${props => props.theme.primaryGrey};
                 }
                 &:-ms-input-placeholder { /* IE 10+ */
                     font-size: 40px;
-                    color: #b3b3b1;
+                    color: ${props => props.theme.primaryGrey};
                 }
                 &:-moz-placeholder { /* Firefox 18- */
                     font-size: 40px;
-                    color: #b3b3b1;
+                    color: ${props => props.theme.primaryGrey};
                 }
             }
 
@@ -171,9 +177,9 @@ const StyledContainer = styled.main`
 
         button.submit-btn {
             outline: 0;
+            background: ${props => props.theme.primaryDarkGrey};
             border: none;
-            background: #ff5633 none;
-            color: #fff;
+            color: ${props => props.theme.white};
             font-weight: 700;
             text-align: center;
             border-radius: 5px;
@@ -186,8 +192,12 @@ const StyledContainer = styled.main`
             min-width: 150px;
             font-size: 1.5rem; 
 
+            &.is-active {
+                background-color: ${props => props.theme.primaryColor};
+            }
+
             &:hover {
-                background-color: #63ADB1;
+                background-color: ${props => props.theme.primaryColor};
                 background-image: none;
                 -webkit-box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34,36,38,.15) inset;
                 box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34,36,38,.15) inset;
