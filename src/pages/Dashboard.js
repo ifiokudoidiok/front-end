@@ -10,7 +10,7 @@ const Dashboard = ({ pendingStories,  getPendingStories, approveStory, rejectSto
 
 	useEffect(() => {
 		getPendingStories();
-	}, [pendingStories]); 
+	}, [pendingStories]); // eslint-disable-line
     
     const onLogout = () => {
         localStorage.clear();

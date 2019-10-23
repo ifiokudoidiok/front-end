@@ -1,28 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import * as actions from "../state/actions";
 import { imageBank } from "../utils/data";
 
 
 
-const SingleUserStory = ({ getUserStories, userStories, userStoriesStatus }) => {
+const SingleUserStory = ({ getUserStories, userStories, userStoriesStatus, ...props }) => {
 
+    const [ currentStory, setCurrentStory ] = useState([]);
+    
     useEffect(() => {
         getUserStories();
     }, []) // eslint-disable-line
 
-    const { id } = useParams();
-    const image = imageBank[id];
+    useEffect(() => {
+        if(userStoriesStatus) setCurrentStory(userStories.reverse())
+    }, [userStoriesStatus]) // eslint-disable-line
+
+    const image = imageBank.reverse()[props.match.params.id - 1];
 
     return (
         <>  
             {
-                userStoriesStatus && userStories.length > 0 ? (
+                userStoriesStatus && currentStory.length > 0 ? (
                     <>
                         <img src={image} alt="Hiii" />
-                        <h1>{userStories[id].title}</h1>
-                        <p>{userStories[id].story}</p>
+                        <h1>{currentStory[props.match.params.id - 1].title}</h1>
+                        <p>{currentStory[props.match.params.id - 1].story}</p>
                     </>
                 ) : (
                     <h1>Hiiii</h1>
@@ -32,4 +37,4 @@ const SingleUserStory = ({ getUserStories, userStories, userStoriesStatus }) => 
     )
 }
 
-export default connect(state => state, actions)(SingleUserStory);
+export default connect(state => state, actions)(withRouter(SingleUserStory));

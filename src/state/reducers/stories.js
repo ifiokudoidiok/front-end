@@ -19,7 +19,6 @@ export const pendingStoriesReducer = (state = initialPendingStories, actions) =>
         case types.GET_PENDING_STORIES:
             return actions.payload;
         case types.SUBMIT_STORY:
-            console.log('Yhhh!')
             return state;
         case types.APPROVE_STORY:
         case types.REJECT_STORY:

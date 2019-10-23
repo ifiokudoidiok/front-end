@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux"
 import * as actions from '../state/actions';
 
@@ -10,7 +10,6 @@ import Roller from "../components/LoadingIndicator/roller";
 
 
 const Stories = ({ getUserStories, userStories, userStoriesStatus }) => {
-
 
     useEffect(() => {
         getUserStories();
