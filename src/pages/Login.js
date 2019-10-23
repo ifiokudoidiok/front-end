@@ -23,7 +23,7 @@ axios.post('https://bwrefugeestories.herokuapp.com/api/auth/login', values)
     })
 }
 
-    const { values, errors, isLoading, visibility, handleChange, handleSubmit, resetForm, toggleVisibility
+    const { values, errors, isLoading, visibility, handleChange, handleSubmit, toggleVisibility
     } = useForm(adminLogin, validation);
 
     const { email, password } = values;
