@@ -16,10 +16,11 @@ import Navigation from "../components/Website/Navigation";
 
 
 
-const SubmitStory = ({ addStory, requestToggle, resolved, error }) => {
+const SubmitStory = ({ addStory, toggleAddStoryStatus, addStoryStatus }) => {
 
     const handleStorySubmit = () => {
         startLoader();
+        setAsSubmitted();
         addStory(values);
     }
 
@@ -27,11 +28,12 @@ const SubmitStory = ({ addStory, requestToggle, resolved, error }) => {
         stopLoader();
         resetForm();
         makeBtnNotVisible();
-        requestToggle(false);
+        toggleAddStoryStatus(false);
     }
 
     const [ isLoading, startLoader, stopLoader ] = useDialog(false);
     const [ isAlertOpen, openAlert, closeAlert ] = useDialog(false);
+    const [ hasSubmitted, setAsSubmitted, setAsNotSubmitted ] = useDialog(false);
     const [ isBtnVisible, makeBtnVisible, makeBtnNotVisible ] = useDialog(false);
     const { values, resetForm, handleChange, handleSubmit } = useForm(handleStorySubmit);
 
@@ -46,15 +48,18 @@ const SubmitStory = ({ addStory, requestToggle, resolved, error }) => {
     }, [title, story]) // eslint-disable-line
 
     useEffect(() => {
-        if(resolved) { 
+        if(hasSubmitted && addStoryStatus) { 
             handleAPIResponse();
             openAlert();
-        } else if(error.status) {
-            handleAPIResponse();
-            console.log(toast);
-            toast.error("Oops, something went wrong. Try again!");
+            setAsNotSubmitted();
         }
-    }, [resolved, error]) // eslint-disable-line
+
+        if(hasSubmitted && addStoryStatus === false) {
+            handleAPIResponse();
+            toast.error("Oops, something went wrong. Try again!");
+            setAsNotSubmitted();
+        }
+    }, [addStoryStatus]) // eslint-disable-line
 
     return (
         <StyledContainer> 

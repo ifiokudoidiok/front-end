@@ -1,10 +1,12 @@
 import React from "react";
 
 
-const Dashboard = () => (
-    <>
-        <h1>Dashboard Page</h1>
-    </>
-);
+const Dashboard = (props) => {
+    return (
+        <>
+            <h1>Hiiii</h1>
+        </>
+    )
+}
 
 export default Dashboard;

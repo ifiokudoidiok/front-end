@@ -24,7 +24,7 @@ export default Header;
 const StyledHeader = styled.header`
     position: relative;
     overflow: hidden;
-    padding: 2rem 0;
+    padding: 2rem;
     padding-bottom: 6rem;
     height: ${props => props.height};
 
@@ -56,7 +56,6 @@ const StyledHeader = styled.header`
         position: relative;
         z-index: 2;
         max-width: ${props => props.theme.largeMaxWidth};
-        width: 85vw;
         height: 100%;
         max-height: 75vh
         display: flex;

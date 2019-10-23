@@ -102,12 +102,11 @@ const StyledNavigation = styled.nav`
                 background: ${props => props.theme.primaryGrey};
                 flex-direction: column;
                 top: 60px;
-                right: 0;
+                right: -10px;
                 width: 100%;
                 text-align: end;
                 max-width: 250px;
                 border-radius: 5px;
-                margin-right: -1rem;
                 &:before  {
                     content: ' ';
                     position: absolute;

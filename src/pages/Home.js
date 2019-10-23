@@ -12,7 +12,7 @@ const Home = () => (
             <Navigation />
             <Slider
                 options={{
-                    autoPlay: 10000,
+                    autoPlay: 8000,
                     lazyLoad: true,
                     pauseAutoPlayOnHover: false,
                     wrapAround: true,
@@ -83,9 +83,15 @@ const ParallaxContainer = styled.div`
                 right: 0;
                 width: 100%;
                 height: 100%;
-                background: rgba(0, 0, 0, 0.8);
+                background: rgba(0, 0, 0, 0.7);
                 transition: 0.4s ease-out;
                 z-index: 2;
+            }
+
+            @media (max-width: 768px) {
+                &:before {
+                    background: rgba(0, 0, 0, 0.85);
+                }
             }
         }
 
@@ -96,18 +102,23 @@ const ParallaxContainer = styled.div`
             height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-end;
             width; 100%;
             color: #fff;
-            padding: 2rem calc((100vw - 1140px)/2);
+            padding: 2rem calc((100vw - 1140px)/2) 20rem;
     
             @media (max-width: 1140px) {
                 padding: 2rem;
+                padding-bottom: 5rem;
             }
     
             h1 {
                 font-size: 7rem;
                 margin-bottom: 1rem;
+
+                @media (max-width: 768px) {
+                    font-size: 4rem;
+                }
             }
     
             p {
@@ -115,6 +126,10 @@ const ParallaxContainer = styled.div`
                 max-width: 600px;
                 line-height: 1.58;
                 width: 100%;
+
+                @media (max-width: 768px) {
+                    font-size: 1.7rem;
+                }
             }
 
             a {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux"
 import * as actions from '../state/actions';
 
@@ -6,13 +6,24 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { imageBank } from "../utils/data";
 import Header from '../components/Website/Header';
+import Roller from "../components/LoadingIndicator/roller";
 
 
-const Stories = ({ getUserStories, userStories }) => {
+const Stories = ({ getUserStories, userStories, userStoriesStatus }) => {
+
+    const [ isThereUpdates, setUpdateBool ] = useState(false);
 
     useEffect(() => {
         getUserStories();
-    }, []) // eslint-disable-line 
+    }, []) // eslint-disable-line
+
+    useEffect(() => {
+        if(isThereUpdates) getUserStories();
+    }, [isThereUpdates]) // eslint-disable-line
+
+    useEffect(() => {
+        setUpdateBool(true)
+    }, [userStories]) // eslint-disable-line
 
     return (
         <>
@@ -23,25 +34,33 @@ const Stories = ({ getUserStories, userStories }) => {
                 image="https://images.unsplash.com/photo-1544006790-b3c81bd2fe74?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
             />
             <StyledContainer>
-                <ul>
-                    {
-                        userStories.map(({id, title, story}, index) => {
-                            const image = imageBank[index];
-                            return (
-                                <li key={id}>
-                                    <div className="card-content">
-                                        <h3>{title}</h3>
-                                        <p>{`${story.split(" ").splice(0, 15).join(" ")}...`}</p>
-                                        <Link to={`/stories/${id}`}>Read full story <span>&#62;</span></Link>
-                                    </div>
-                                    <div className="card-image">
-                                        <img src={image} alt="Randomized refugee resource from Unsplash" />
-                                    </div>
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
+                {   
+                    !userStoriesStatus ? (
+                        <div className="loading-indicator">
+                            <Roller isSiteWide={true} />
+                        </div>
+                    ) : (
+                        <ul>
+                            {
+                                userStories.map(({id, title, story}, index) => {
+                                    const image = imageBank[index];
+                                    return (
+                                        <li key={id}>
+                                            <div className="card-content">
+                                                <h3>{title}</h3>
+                                                <p>{`${story.split(" ").splice(0, 15).join(" ")}...`}</p>
+                                                <Link to={`/stories/${id}`}>Read full story <span>&#62;</span></Link>
+                                            </div>
+                                            <div className="card-image">
+                                                <img src={image} alt="Randomized refugee resource from Unsplash" />
+                                            </div>
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ul>
+                    )
+                }
             </StyledContainer>
         </>
     )
@@ -54,6 +73,13 @@ const StyledContainer = styled.main`
     margin: 0 auto;
     padding: ${props => props.theme.containerWrap};
     width: 85vw;
+
+    .loading-indicator {
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
     li {
         margin-bottom: 5rem;

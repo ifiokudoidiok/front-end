@@ -12,6 +12,21 @@ export const GlobalStyles = createGlobalStyle`
         font-size: 62.5%;
     }
 
+    html {
+        overflow: scroll;
+        overflow-x: hidden;
+        -ms-overflow-style: none;
+        overflow: -moz-scrollbars-none;
+    }
+    ::-webkit-scrollbar {
+        width: 0px;  /* Remove scrollbar space */
+        background: transparent;  /* Optional: just make scrollbar invisible */
+    }
+    /* Optional: show position indicator in red */
+    ::-webkit-scrollbar-thumb {
+        background: transparent;
+    }
+
     body {
         font-family: ${props => props.theme.bodyFont};
         font-weight: 400;
