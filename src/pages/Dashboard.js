@@ -8,7 +8,8 @@ import avatar from '../utils/photo/avatar.png';
 
 
 
-const Dashboard = ({ pendingStories,  getPendingStories, approveStory, rejectStory}) => {
+
+const Dashboard = ({ pendingStories,  getPendingStories, approveStory}) => {
 
 	useEffect(
 		() => {
@@ -16,7 +17,7 @@ const Dashboard = ({ pendingStories,  getPendingStories, approveStory, rejectSto
 		},
 		[getPendingStories ]
     ); 
-    
+
     const onLogout = () => {
         localStorage.clear();
         // props.history.replace('/login');
@@ -27,10 +28,10 @@ const Dashboard = ({ pendingStories,  getPendingStories, approveStory, rejectSto
             <div className='adminSection'>
                 <div>
                     <img src={avatar} alt="Avatar" className="avatar" />
-                    <p>CLick to <i>edit</i> profile</p>
+                    <p><i>CLick to edit profile</i></p>
                 </div>
                 <div className='admin-actions'>
-                    <p>return to<Link to='/' ><i>main</i> </Link> page</p>
+                    <p><Link to='/'><i>Main Page</i> </Link></p>
                     <button className='logout' onClick={onLogout}>log-out</button>
                 </div>
             </div>
@@ -42,11 +43,7 @@ const Dashboard = ({ pendingStories,  getPendingStories, approveStory, rejectSto
                             <h3 ><i>{person.title}</i></h3>
                             <p>{person.story}</p>
                             <div className='btnDiv'>
-                            <Link to={`/view-story/${person.id}`} key={person.id} >           
-                                <button>View Story</button>
-                            </Link>
                                 <button onClick={() => approveStory(person.id,{...person, highlight:null})}>Approve Story</button>
-                                <button onClick={() => rejectStory(person.id)}>Reject Story</button>
                             </div>
                         </div>
                     );
@@ -59,37 +56,41 @@ const Dashboard = ({ pendingStories,  getPendingStories, approveStory, rejectSto
 export default connect( state => state, actions)(Dashboard);
 
 const StyledContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    font-size: 16px;
+
+display: flex;
+justify-content: space-between;
+font-size: 16px;
 
 .adminSection{
-    max-width: 250px;
-    width:100%;
-    background-color: #D3D3D3;
-    text-align: center;
+max-width: 250px;
+width:100%;
+background-color: #D3D3D3;
+text-align: center;
 }
 
 .avatar {
-    vertical-align: middle;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+vertical-align: middle;
+width: 150px;
+height: 150px;
+border-radius: 50%;
+margin-bottom: 10px;
+margin-top: 20px;
 }
 
 .logout{
-    color:dodgerblue;
-    padding:3px 5px;
+color:black;
+padding:3px 7px;
+border: 1px solid gray;
 }
 .logout:hover{
-    border: 3px solid #F08080;
-    color:red;
+border: 2px solid #F08080;
+color: red;
 
 }
 
 .admin-actions{
-    margin: 10px 5px;
-    border: 2px solid gray
+margin: 20px 10px;
+border: 2px solid gray
 
 }
 
