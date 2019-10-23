@@ -32,8 +32,8 @@ const Stories = ({ getUserStories, userStories, userStoriesStatus }) => {
                     ) : (
                         <ul>
                             {
-                                userStories.map(({id, title, story}, index) => {
-                                    const image = imageBank[index];
+                                userStories.map(({id, title, story}) => {
+                                    const image = imageBank.filter((item, index) => index === (id - 1))[0] || "https://source.unsplash.com/1600x900/?refugees,refugee";
                                     return (
                                         <li key={id}>
                                             <div className="card-content">
@@ -42,7 +42,7 @@ const Stories = ({ getUserStories, userStories, userStoriesStatus }) => {
                                                 <Link to={`/stories/${id}`}>Read full story <span>&#62;</span></Link>
                                             </div>
                                             <div className="card-image">
-                                                <img src={image} alt="Randomized refugee resource from Unsplash" />
+                                                <img src={image} alt={title} />
                                             </div>
                                         </li>
                                     )

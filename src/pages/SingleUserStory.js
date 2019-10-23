@@ -11,28 +11,30 @@ import Navigation from "../components/Website/Navigation";
 const SingleUserStory = ({ getUserStories, userStories, userStoriesStatus, ...props }) => {
 
     const [ currentStory, setCurrentStory ] = useState([]);
+    const [ image, setImage ] = useState("");
     
     useEffect(() => {
         getUserStories();
     }, []) // eslint-disable-line
 
     useEffect(() => {
-        if(userStoriesStatus) setCurrentStory(userStories.reverse())
+        if(userStoriesStatus) {
+            setCurrentStory(userStories.filter(item => item.id === Number(props.match.params.id)))
+            setImage(imageBank.filter((item, index) => index === (Number(props.match.params.id) - 1))[0] || "https://source.unsplash.com/1600x900/?refugees,refugee")
+        }
     }, [userStoriesStatus]) // eslint-disable-line
-
-    const image = imageBank.reverse()[props.match.params.id - 1];
 
     return (
         <StyledContainer>  
             <Navigation noheader />
             {
-                userStoriesStatus && currentStory.length > 0 ? (
+                userStoriesStatus && currentStory.length !== 0 ? (
                     <main>
-                        <h1>{currentStory[props.match.params.id - 1].title}</h1>
+                        <h1>{currentStory[0].title}</h1>
                         <div className="featured-image">
-                            <img src={image} alt={currentStory[props.match.params.id - 1].title} />
+                            <img src={image} alt={currentStory[0].title} />
                         </div>
-                        <p>{currentStory[props.match.params.id - 1].story}</p>
+                        <p>{currentStory[0].story}</p>
                     </main>
                 ) : (
                     <h1>Hiiii</h1>
