@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import logo from '../../assets/images/refugeestories-logo.png';
 
 
-const Navigation = () => {
+const Navigation = ({ noheader }) => {
 
     const [ isOpen, setIsOpen ] = useState(false);
 
@@ -13,7 +13,7 @@ const Navigation = () => {
     }
 
     return (
-        <StyledNavigation>
+        <StyledNavigation className={noheader ? 'no-header' : null}>
             <div className="site-logo">
                 <img src={logo} alt="Refugee Stories Logo" />
             </div>
@@ -47,7 +47,21 @@ const StyledNavigation = styled.nav`
     width: 100%;
     position: absolute;
     top: 0;
-    color: #fff;
+    color: ${props => props.theme.white};
+
+    &.no-header {
+        max-width: ${props => props.theme.largeMaxWidth};
+        margin: 0 auto;
+        position: relative;
+
+        a {
+            color: ${props => props.theme.black};
+        }
+
+        .responsive-nav span {
+            background: ${props => props.theme.black};
+        }
+    }
 
     .site-logo {
         max-width: 50px;
@@ -65,19 +79,17 @@ const StyledNavigation = styled.nav`
                 display: block;
 
                 &:hover {
-                    color: #ff5633;
+                    color: ${props => props.theme.primaryColor};
                 }
     
                 &.selected {
-                    border-bottom: 2px solid #ff5633;
-                    color: #ff5633;
+                    border-bottom: 2px solid ${props => props.theme.primaryColor};
+                    color: ${props => props.theme.primaryColor};
                 }
             }
 
             &:last-of-type {
-                a {
-                    padding-right: 0;
-                }
+                padding-right: 0;
             }
         }
 
@@ -87,22 +99,21 @@ const StyledNavigation = styled.nav`
             &.open {
                 display: flex;
                 position: absolute;
-                background: rgba(0, 0, 0, .9);
+                background: ${props => props.theme.primaryGrey};
                 flex-direction: column;
                 top: 60px;
-                right: 0;
+                right: -10px;
                 width: 100%;
                 text-align: end;
                 max-width: 250px;
                 border-radius: 5px;
-                margin-right: -1rem;
                 &:before  {
                     content: ' ';
                     position: absolute;
                     border: solid 15px transparent;
                     border-top: solid 0px transparent;
                     border-width: 14px;
-                    border-color: rgba(0, 0, 0, .9) transparent transparent transparent;
+                    border-color: ${props => props.theme.primaryGrey} transparent transparent transparent;
                     right: .8rem;
                     transform: rotate(180deg);
                     top: -28px;
@@ -114,17 +125,17 @@ const StyledNavigation = styled.nav`
     
                     a {
                         width: 100%;
-                        color: rgba(255, 255, 255, .7);
+                        color: ${props => props.theme.white};
                         padding: 1.5rem 0 .75rem;
-                        border-bottom: 1px solid rgba(255, 255, 255, .7);
+                        border-bottom: 1px solid ${props => props.theme.white};
     
                         &.selected {
-                            border-bottom: 1px solid #ff5633;
-                            color: #ff5633;
+                            border-bottom: 1px solid ${props => props.theme.primaryColor};
+                            color: ${props => props.theme.primaryColor};
                         }
     
                         &:hover {
-                            color: #ff5633;
+                            color: ${props => props.theme.primaryColor};
                         }
                     }
     
@@ -160,7 +171,7 @@ const StyledNavigation = styled.nav`
             position: absolute;
             height: 2.5px;
             width: 50%;
-            background: #fff;
+            background: ${props => props.theme.white};
             opacity: 1;
             -webkit-transform: rotate(0deg);
             -moz-transform: rotate(0deg);
@@ -196,7 +207,7 @@ const StyledNavigation = styled.nav`
 
         &.open {
             span {
-                background: #ff5633;
+                background: ${props => props.theme.primaryColor};
 
                 &:nth-child(1), &:nth-child(6) {
                     -webkit-transform: rotate(45deg);

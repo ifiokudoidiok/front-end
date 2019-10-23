@@ -1,27 +1,26 @@
 import * as types from '../types';
 
 
-const initialResolvedState = false;
-export const resolvedReducer = (state = initialResolvedState, actions) => {
+
+const initialUserStoriesStatus = null;
+export const userStoriesStatusReducer = (state = initialUserStoriesStatus, actions) => {
     switch(actions.type) {
-        case types.REQUEST_TOGGLE:
-            return actions.payload;
+        case types.GET_USER_STORIES_SUCCESS:
+            return true;
+        case types.GET_USER_STORIES_FAILED:
+            return false;
         default:
             return state
     }
 }
 
-const initialErrorState = {
-    status: false,
-    message: ''
-};
-export const errorReducer = (state = initialErrorState, actions) => {
+const initialaddStoryStatus = null;
+export const addStoryStatusReducer = (state = initialaddStoryStatus, actions) => {
     switch(actions.type) {
-        case types.ERROR_TOGGLE:
-            return {
-                status: actions.payload.status,
-                message: actions.payload.message
-            };
+        case types.SUBMIT_STORY_SUCCESS:
+            return true;
+        case types.SUBMIT_STORY_FAILED:
+            return false;
         default:
             return state
     }

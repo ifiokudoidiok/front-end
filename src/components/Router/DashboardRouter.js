@@ -7,11 +7,10 @@ import SinglePendingStory from '../../pages/SinglePendingStory';
 
 const DashboardRouter = () => (
     <>
-        {/* <PrivateRoute path="/admin"  render={props => <Dashboard {...props} /> } /> */}
         <PrivateRoute path="/admin" component={Dashboard} />
         <PrivateRoute path="/view-story/:id" component={SinglePendingStory} />
-         <PrivateRoute path="/approved-stories" component={ApprovedStories} />
+        <PrivateRoute path="/approved-stories" component={ApprovedStories} />
     </>
 );
 
-export default DashboardRouter
+export default DashboardRouter;

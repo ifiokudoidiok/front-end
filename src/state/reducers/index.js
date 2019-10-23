@@ -1,13 +1,13 @@
 import { userStoriesReducer, pendingStoriesReducer } from './stories';
-import { resolvedReducer, errorReducer } from './responses';
+import { userStoriesStatusReducer, addStoryStatusReducer } from './responses';
 import { combineReducers } from 'redux'
 
 
 const rootReducer = combineReducers({
     userStories: userStoriesReducer,
+    userStoriesStatus: userStoriesStatusReducer,
     pendingStories: pendingStoriesReducer,
-    resolved: resolvedReducer,
-    error: errorReducer
+    addStoryStatus: addStoryStatusReducer
 })
 
 export default rootReducer;
