@@ -6,12 +6,15 @@ import * as actions from '../state/actions/index';
 import avatar from '../utils/photo/avatar.png';
 
 
-const Dashboard = ({ pendingStories,  getPendingStories, approveStory, rejectStory, history }) => {
+const Dashboard = ({ pendingStories,  getPendingStories, approveStory, history }) => {
 
-	useEffect(() => {
-		getPendingStories();
-	}, [pendingStories]); 
-    
+	useEffect(
+		() => {
+			getPendingStories();
+		},
+		[pendingStories ]
+    ); 
+
     const onLogout = () => {
         localStorage.clear();
         history.replace('/login');
@@ -22,33 +25,30 @@ const Dashboard = ({ pendingStories,  getPendingStories, approveStory, rejectSto
             <div className='adminSection'>
                 <div>
                     <img src={avatar} alt="Avatar" className="avatar" />
-                    <p>CLick to <i>edit</i> profile</p>
+                    <p><i> Welcome Admin-01</i></p>
+                    <p><i>CLick Here to edit profile</i></p>
                 </div>
                 <div className='admin-actions'>
-                    <p>return to<Link to='/' ><i>main</i> </Link> page</p>
-                    <button className='logout' onClick={onLogout}>log-out</button>
+                    <p><Link to='/'><i>Home Page</i> </Link></p>
+                    <p><Link to='/approved-stories'><i>Approved Story Page</i> </Link></p>
+                    <button className='logout' onClick={onLogout}>Log-Out</button>
                 </div>
             </div>
             <div className='pendingSection'>
                 <h2 className='intro'>Pending Stories</h2>
-                {   
-                    pendingStories.map((person) => {
-                        return (
-                            <div key={person.id} className='pendingCards'>
-                                <h3 ><i>{person.title}</i></h3>
-                                <p>{person.story}</p>
-                                <div className='btnDiv'>
-                                <Link to={`/view-story/${person.id}`} key={person.id} >           
-                                    <button>View Story</button>
-                                </Link>
-                                    <button onClick={() => approveStory(person.id,{...person, highlight:null})}>Approve Story</button>
-                                    <button onClick={() => rejectStory(person.id)}>Reject Story</button>
-                                </div>
+                {pendingStories.map((person) => {
+                    return (
+                        <div key={person.id} className='pendingCards'>
+                            <h3 ><i>{person.title}</i></h3>
+                            <p>{person.story}</p>
+                            <div className='btnDiv'>
+                                <button onClick={() => approveStory(person.id,{...person, highlight:null})}>Approve Story</button>
                             </div>
+                        </div>
                         );
                     })
                 }
-            </div>			
+            </div>	            		
 		</StyledContainer>
 	);
 };
@@ -56,42 +56,52 @@ const Dashboard = ({ pendingStories,  getPendingStories, approveStory, rejectSto
 export default connect( state => state, actions)(Dashboard);
 
 const StyledContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    font-size: 16px;
 
-    .adminSection {
-        max-width: 250px;
-        width: 100%;
-        background-color: #D3D3D3;
-        text-align: center;
-    }
+display: flex;
+justify-content: space-between;
+font-size: 16px;
 
-    .avatar {
-        vertical-align: middle;
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-    }
+.adminSection{
+max-width: 250px;
+width:100%;
+background-color: #D3D3D3;
+text-align: center;
+}
 
-    .logout {
-        color: dodgerblue;
-        padding: 3px 5px;
+.avatar {
+vertical-align: middle;
+width: 150px;
+height: 150px;
+border-radius: 50%;
+margin-bottom: 10px;
+margin-top: 20px;
+}
 
-        &:hover {
-            border: 3px solid #F08080;
-            color: red;
-        }
-    }
+.logout{
+color:black;
+padding:3px 7px;
+border: 1px solid gray;
+}
+.logout:hover{
+border: 2px solid #F08080;
+color: red;
 
-    .admin-actions {
-        margin: 10px 5px;
-        border: 2px solid gray
-    }
+}
 
-    .pendingSection {
-        max-width: 800px;
-        width: 100%;
+.admin-actions{
+margin: 20px 10px;
+border: 2px solid gray
+
+}
+
+a:hover{
+    color:black;
+    font-size:18px;
+}
+
+    .pendingSection{
+        max-width:800px;
+        width:100%;
         background-color: whitesmoke;
         margin: 0 auto;
     }
@@ -103,7 +113,7 @@ const StyledContainer = styled.div`
         box-shadow: 0 -1px 0 #e0e0e0, 0 0 2px rgba(0, 0, 0, 0.12),
             0 2px 4px rgba(0, 0, 0, 0.24);  
         background-color: #FFEBCD;
-        margin: 10px 10px 30px 10px;
+        margin: 10px 10px 20px 10px;
     }
 
     .btnDiv {
@@ -115,11 +125,13 @@ const StyledContainer = styled.div`
         margin:10px 5px 5px 5px;
         padding: 5px;
         border-radius:10px;
+        border: 1px solid gray;
         background-color:lightgray
     }
 
     button:hover {
-        background-color: #90EE90
+        background-color: #90EE90;
+        font-size: 13.5px;
     }
 
     .intro {
