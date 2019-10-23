@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { slides } from '../utils/data';
 import Slider from '../components/Website/Slider';
 import Navigation from "../components/Website/Navigation";
@@ -28,6 +29,7 @@ const Home = () => (
                             <div className="slider-content">
                                 <h1>{title}</h1>
                                 <p>{story}</p>
+                                <Link to="/stories">See all stories <span>&#62;</span></Link>
                             </div>
                         </div>
                     ))
@@ -113,6 +115,19 @@ const ParallaxContainer = styled.div`
                 max-width: 600px;
                 line-height: 1.58;
                 width: 100%;
+            }
+
+            a {
+                font-size: 2rem;
+                margin-top: 2rem;
+                color: ${props => props.theme.primaryColor};
+                width: fit-content;
+                display: inline-block;
+                border-bottom: 3px solid transparent;
+
+                &:hover {
+                    border-bottom: 3px solid ${props => props.theme.primaryColor};
+                }
             }
         }
     }

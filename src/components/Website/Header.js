@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import Navigation from './Navigation';
 
 
-const Header = ({ height, title, story }) => {
+const Header = ({ image, height, title, story }) => {
     return (
         <StyledHeader height={height}>
             <div className="hero-background">
-                <img src="https://source.unsplash.com/1600x900/?refugees,refugee" alt="Randomized refugee resource from Unsplash" />
+                <img src={`${image} || https://source.unsplash.com/1600x900/?refugees,refugee`} alt="Randomized refugee resource from Unsplash" />
             </div>
             <div className="hero-content">
                 <Navigation />

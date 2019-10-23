@@ -4,6 +4,7 @@ import * as actions from '../state/actions';
 
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { imageBank } from "../utils/data";
 import Header from '../components/Website/Header';
 
 
@@ -19,11 +20,13 @@ const Stories = ({ getUserStories, userStories }) => {
                 height="60vh"
                 title="Stories Page :)"  
                 story="Welcome to the stories page. I sure i'm glad that you're here"
+                image="https://images.unsplash.com/photo-1544006790-b3c81bd2fe74?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
             />
             <StyledContainer>
                 <ul>
                     {
-                        userStories.map(({id, title, story}) => {
+                        userStories.map(({id, title, story}, index) => {
+                            const image = imageBank[index];
                             return (
                                 <li key={id}>
                                     <div className="card-content">
@@ -32,7 +35,7 @@ const Stories = ({ getUserStories, userStories }) => {
                                         <Link to={`/stories/${id}`}>Read full story <span>&#62;</span></Link>
                                     </div>
                                     <div className="card-image">
-                                        <img src="https://source.unsplash.com/1600x900/?person" alt="Randomized refugee resource from Unsplash" />
+                                        <img src={image} alt="Randomized refugee resource from Unsplash" />
                                     </div>
                                 </li>
                             )
