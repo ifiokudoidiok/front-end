@@ -5,7 +5,7 @@ import Dashboard from "../../pages/Dashboard";
 import ApprovedStories from "../../pages/ApprovedStories";
 
 import styled from 'styled-components';
-import avatar from '../../utils/photo/avatar.png';
+import avatar from '../../assets/images/refugeestories-logo.png';
 
 
 const DashboardLayout = props => {

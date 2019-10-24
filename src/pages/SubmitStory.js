@@ -191,6 +191,7 @@ const StyledContainer = styled.main`
             min-height: 40px;
             min-width: 150px;
             font-size: 1.5rem; 
+            margin-top: 2rem;
 
             &.is-active {
                 background-color: ${props => props.theme.primaryColor};
