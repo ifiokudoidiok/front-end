@@ -4,6 +4,8 @@ import Roller from '../utils/rolerIndicator'
 import useForm from '../utils/hooks/useForm';
 import axios from 'axios';
 import {validation, validationChecker } from '../utils/Validation';
+import Header from '../components/Website/Header';
+import { resetWarningCache } from "prop-types";
 
 
 const Login = (props) => {
@@ -16,16 +18,23 @@ const Login = (props) => {
         })
         .catch(err=>{
             alert(err.response.statusText + ", Please provide valid Email and Password")
+            resetForm()
         })
     }
 
-    const { values, errors, isLoading, visibility, handleChange, handleSubmit, toggleVisibility } = useForm(adminLogin, validation);
+    const { values, errors, isLoading, visibility, handleChange, handleSubmit, toggleVisibility, resetForm } = useForm(adminLogin, validation);
     const { email, password } = values;
     const { initialEmailState, emailMatch, minMaxMatch, numberRequired,initialPasswordState } = errors;
 
     return (
         <StyledDiv >
-        <form onSubmit={handleSubmit}>
+        <Header 
+                height="45vh"
+                image = "https://source.unsplash.com/featured/?refugees,refugee"
+            />
+
+            <h3>Please Enter Log-In Details below</h3>
+        <form>
             <label htmlFor="email">
                 <span>Email</span>
                 <input id="email" type="email" value={email || ''} onChange={handleChange} required />
@@ -41,11 +50,11 @@ const Login = (props) => {
                 </span>
                 <input id="password" type={visibility ? 'text' : 'password'} value={password || ''} onChange={handleChange} required />               
                 <ul className="input-requirements">
-					<li className={validationChecker(initialPasswordState, minMaxMatch)}>At least 6 characters long (and less than 100 characters)</li>
+					<li className={validationChecker(initialPasswordState, minMaxMatch)}>At least 11 characters long (and less than 100 characters)</li>
 					<li className={validationChecker(initialPasswordState, numberRequired)}>Contains at least 1 number</li>
 				</ul>
             </label>
-            <button type="submit" className="submit-btn">
+            <button type="submit" className="submit-btn" onClick={handleSubmit}>
                 {isLoading ? <Roller /> : 'Submit'}
             </button>
         </form>
@@ -58,10 +67,17 @@ export default Login;
 
 const StyledDiv = styled.div`
 
+    h3{
+        text-align: center;
+        font-size: 2rem;
+        margin-top: 3%;
+    }
+
     form{
         background-color: #fff;
         max-width: 600px;
-        margin: 10% auto;
+        margin: 1% auto;
+        margin-bottom: 5%;
         padding: 3rem;
         box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.3);
         border-bottom: 5px solid #ffdb3a;

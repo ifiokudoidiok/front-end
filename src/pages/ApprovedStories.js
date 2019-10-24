@@ -46,15 +46,14 @@ const ApprovedStories = ({ getUserStories, userStories, userStoriesStatus, delet
 
 export default connect(state => state, actions)(ApprovedStories);
 const StyledContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
+
+    margin-top: 2.5%;
     font-size: 16px;
 
     .approvedSection{
-        max-width:1000px;
+        max-width:1100px;
         width:100%;
         background-color: whitesmoke;
-        margin: 0 auto;
     }
 
     .approvedCards {
@@ -81,7 +80,7 @@ const StyledContainer = styled.div`
     }
 
     .dashboard-button:hover {
-        background-color: #90EE90;
+        background-color: #F08080;
         font-size: 13.5px;
     }
 
