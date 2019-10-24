@@ -62,22 +62,15 @@ export default DashboardLayout;
 
 const StyledContainer = styled.div`
     display: flex;
-<<<<<<< HEAD
     height: 100vh;
     overflow: hidden;
 
-=======
-    justify-content: space-between;
-    font-size: 16px;
-    background-color: #D3D3D3;
->>>>>>> master
 
     .side-nav {
         display: flex;
         flex-direction: column;
         justify-content: center;
         max-width: 250px;
-<<<<<<< HEAD
         width: 100%
         height: 100vh;
         overflow: hidden;
@@ -85,12 +78,6 @@ const StyledContainer = styled.div`
         position: relative;
         padding: 2rem;
         padding-right: 0;
-=======
-        width:100%;
-        text-align: center;
-        margin-top: 5%;
-    }
->>>>>>> master
 
         .site-logo {
             max-width: 40px;
@@ -99,20 +86,9 @@ const StyledContainer = styled.div`
             left: 2rem;
         }
 
-<<<<<<< HEAD
         ul {
             min-height: 450px;
             width: 100%;
-=======
-    .logout {
-        color:dodgerblue;
-        padding:3px 5px;
-        margin:10px 5px 5px 5px;
-        border: 1px solid gray;
-        border-radius:10px;
-        background-color:lightgray
-    }
->>>>>>> master
 
             a, button {
                 display: flex;
