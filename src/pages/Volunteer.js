@@ -31,7 +31,7 @@ const Volunteer = ({ volunteerPlaces, volunteerPlacesStatus, getVolunteerPlaces 
         } else {
             alert("Sorry, browser does not support geolocation!");
         }
-    }, []) 
+    }, []) //eslint-disable-line
 
     useEffect(() => {
         setViewport({
@@ -39,12 +39,18 @@ const Volunteer = ({ volunteerPlaces, volunteerPlacesStatus, getVolunteerPlaces 
             lat: geolocation.lat,
             lng: geolocation.lng
         })
-    }, [geolocation])
+    }, [geolocation]) //eslint-disable-line
 
 
     return (
-        <>
-            <Navigation noheader />
+        <StyledMapContainer>
+            <header>
+                <Navigation noheader />
+                <div className="page-content">
+                    <h2>Join the volunteer communities</h2>
+                    <p>Welcome to the stories page. I sure i'm glad that you're here</p>
+                </div>
+            </header>
             <ReactMapGL 
                 {...viewport} 
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
@@ -60,7 +66,7 @@ const Volunteer = ({ volunteerPlaces, volunteerPlacesStatus, getVolunteerPlaces 
                             latitude={org.location.lat}
                             longitude={org.location.lng}
                         >
-                            <MapButton
+                            <button
                                 className="marker-btn"
                                 onClick={
                                     e => {
@@ -70,7 +76,7 @@ const Volunteer = ({ volunteerPlaces, volunteerPlacesStatus, getVolunteerPlaces 
                                 }
                             >
                                 <img src={refugeeOrgIcon} alt="Refugee Organizations Icon" />
-                            </MapButton>
+                            </button>
                         </Marker>
                     ))
                 }
@@ -97,16 +103,33 @@ const Volunteer = ({ volunteerPlaces, volunteerPlacesStatus, getVolunteerPlaces 
                 }
 
             </ReactMapGL>
-        </>
+        </StyledMapContainer>
     );
 }
 
 export default connect(state => state, actions)(Volunteer)
 
-const MapButton = styled.button`
-    background: transparent;
-    border: none; 
-    outline: none;
-    height: 20px;
-    width: 20px;
+const StyledMapContainer = styled.div`
+
+    header {
+        padding: 2rem;
+
+        .page-content {
+            max-width: ${props => props.theme.largeMaxWidth};
+            margin: 5rem auto 2rem;
+            width: 100%;
+
+            h2 {
+                font-size: 5rem;
+            }
+        }
+    }
+
+    button.marker-btn {
+        background: transparent;
+        border: none; 
+        outline: none;
+        height: 20px;
+        width: 20px;
+    }
 `
