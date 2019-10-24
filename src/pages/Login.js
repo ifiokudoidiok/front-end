@@ -7,15 +7,16 @@ import {validation, validationChecker } from '../utils/Validation';
 
 
 const Login = (props) => {
-
     
     const adminLogin = () => {
-        axios.post('https://bwrefugeestories.herokuapp.com/api/auth/login', values)
-            .then(res => {
-                localStorage.setItem('token', res.data.token);
-                props.history.push('/dashboard');
-            })
-            .catch(err=>{console.log(err.message)})
+    axios.post('https://bwrefugeestories.herokuapp.com/api/auth/login', values)
+        .then(res => {
+            localStorage.setItem('token', res.data.token);
+            props.history.push('/dashboard');
+        })
+        .catch(err=>{
+            alert(err.response.statusText + ", Please provide valid Email and Password")
+        })
     }
 
     const { values, errors, isLoading, visibility, handleChange, handleSubmit, toggleVisibility } = useForm(adminLogin, validation);
@@ -56,7 +57,6 @@ export default Login;
 
 
 const StyledDiv = styled.div`
-    
 
     form{
         background-color: #fff;

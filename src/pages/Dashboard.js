@@ -21,7 +21,9 @@ const Dashboard = ({ pendingStories,  getPendingStories, approveStory }) => {
                             <h3 ><i>{person.title}</i></h3>
                             <p>{person.story}</p>
                             <div className='btnDiv'>
-                                <button onClick={() => approveStory(person.id,{...person, highlight:null})}>Approve Story</button>
+                                <button onClick={() => approveStory(person.id,{...person, highlight:null})} className='dashboard-button'>
+                                    Approve Story
+                                </button>
                             </div>
                         </div>
                     );
@@ -53,7 +55,7 @@ const StyledContainer = styled.div`
         justify-content: flex-end;
     }
 
-    button {
+    .dashboard-button {
         margin:10px 5px 5px 5px;
         padding: 5px;
         border-radius:10px;
@@ -61,7 +63,7 @@ const StyledContainer = styled.div`
         background-color:lightgray
     }
 
-    button:hover {
+    .dashboard-button:hover {
         background-color: #90EE90;
         font-size: 13.5px;
     }
