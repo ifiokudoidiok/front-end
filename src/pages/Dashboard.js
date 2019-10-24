@@ -31,7 +31,7 @@ const Dashboard = ({ pendingStories,  getPendingStories, approveStory, history }
                 <div className='admin-actions'>
                     <p><Link to='/'><i>Home Page</i> </Link></p>
                     <p><Link to='/approved-stories'><i>Approved Story Page</i> </Link></p>
-                    <button className='logout' onClick={onLogout}>Log-Out</button>
+                    <button className='logout dashboard-button' onClick={onLogout}>Log-Out</button>
                 </div>
             </div>
             <div className='pendingSection'>
@@ -42,7 +42,9 @@ const Dashboard = ({ pendingStories,  getPendingStories, approveStory, history }
                             <h3 ><i>{person.title}</i></h3>
                             <p>{person.story}</p>
                             <div className='btnDiv'>
-                                <button onClick={() => approveStory(person.id,{...person, highlight:null})}>Approve Story</button>
+                                <button onClick={() => approveStory(person.id,{...person, highlight:null})} className='dashboard-button'>
+                                    Approve Story
+                                </button>
                             </div>
                         </div>
                         );
@@ -100,7 +102,7 @@ a:hover{
 }
 
     .pendingSection{
-        max-width:800px;
+        max-width:1000px;
         width:100%;
         background-color: whitesmoke;
         margin: 0 auto;
@@ -121,7 +123,7 @@ a:hover{
         justify-content: flex-end;
     }
 
-    button {
+    .dashboard-button {
         margin:10px 5px 5px 5px;
         padding: 5px;
         border-radius:10px;
@@ -129,7 +131,7 @@ a:hover{
         background-color:lightgray
     }
 
-    button:hover {
+    .dashboard-button:hover {
         background-color: #90EE90;
         font-size: 13.5px;
     }

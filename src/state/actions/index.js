@@ -74,10 +74,8 @@ export const addStory = (story) => dispatch => {
   
 
 export const approveStory = (id, story) => dispatch => {
-    console.log('calling Approve story..')
     withAuth().post(`/api/admin/stories/approve/${id}`, story)
         .then(res => {
-            console.log('Approved!')
             dispatch({
                 type: types.APPROVE_STORY
             });
@@ -87,7 +85,6 @@ export const approveStory = (id, story) => dispatch => {
 
 
 export const rejectStory = (id) => dispatch => {
-    console.log('calling reject..')
     axios.delete(`/api/admin/stories/reject/${id}`)
         .then(res => {
             dispatch({
@@ -99,10 +96,8 @@ export const rejectStory = (id) => dispatch => {
 
 
 export const deleteStory = (id) => dispatch => {
-    console.log('calling delete...')
     withAuth().delete(`/api/admin/stories/delete/${id}`)
         .then(res => {
-            console.log("deleted!")
             dispatch({
                 type: types.DELETE_STORY
             });

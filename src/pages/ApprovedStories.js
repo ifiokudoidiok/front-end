@@ -17,7 +17,7 @@ const ApprovedStories = ({ getUserStories, userStories, userStoriesStatus, delet
         <StyledContainer>
             {   
                 !userStoriesStatus ? (
-                    <div className="loading-indicator">
+                    <div className="loading-indicator indicator">
                         <Roller isSiteWide={true} />
                     </div>
                 ) : (
@@ -30,7 +30,9 @@ const ApprovedStories = ({ getUserStories, userStories, userStoriesStatus, delet
                                         <h3><i>{person.title}</i></h3>
                                         <p>{person.story}</p>
                                         <div className='btnDiv'>
-                                            <button onClick={() => deleteStory(person.id)}>Delete Story</button>
+                                            <button onClick={() => deleteStory(person.id)}className='dashboard-button'>
+                                                Delete Story
+                                            </button>
                                         </div>
                                     </div>
                                 )
@@ -50,7 +52,7 @@ const StyledContainer = styled.div`
     font-size: 16px;
 
     .approvedSection{
-        max-width:800px;
+        max-width:1000px;
         width:100%;
         background-color: whitesmoke;
         margin: 0 auto;
@@ -71,7 +73,7 @@ const StyledContainer = styled.div`
         justify-content: flex-end;
     }
 
-    button {
+    .dashboard-button {
         margin:10px 5px 5px 5px;
         padding: 5px;
         border-radius:10px;
@@ -79,7 +81,7 @@ const StyledContainer = styled.div`
         background-color:lightgray
     }
 
-    button:hover {
+    .dashboard-button:hover {
         background-color: #90EE90;
         font-size: 13.5px;
     }
