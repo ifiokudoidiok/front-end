@@ -9,7 +9,7 @@ import Navigation from "../components/Website/Navigation";
 const Home = () => (
     <ParallaxContainer>
         <header className="is-home-page">
-            <Navigation />
+            <Navigation ishome />
             <Slider
                 options={{
                     autoPlay: 8000,
