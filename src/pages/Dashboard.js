@@ -5,7 +5,7 @@ import * as actions from '../state/actions/index';
 
 
 
-const Dashboard = ({ pendingStories,  getPendingStories, approveStory }) => {
+const Dashboard = ({ pendingStories,  getPendingStories, rejectStory, approveStory }) => {
 
 	useEffect(() => {
 		getPendingStories();
@@ -24,6 +24,11 @@ const Dashboard = ({ pendingStories,  getPendingStories, approveStory }) => {
                                 <button onClick={() => approveStory(person.id,{...person, highlight:null})} className='dashboard-button'>
                                     Approve Story
                                 </button>
+
+                                {/* End Point doesn't work */}
+                                {/* <button onClick={() => rejectStory(person.id)} className='dashboard-button'>
+                                    Reject Story
+                                </button> */}
                             </div>
                         </div>
                     );
