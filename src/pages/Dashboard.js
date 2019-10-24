@@ -13,27 +13,29 @@ const Dashboard = ({ pendingStories,  getPendingStories, rejectStory, approveSto
 
 	return (
         <StyledContainer>
-            <h2 className='intro'>Pending Stories</h2>
-            {
-                pendingStories.map((person) => {
-                    return (
-                        <div key={person.id} className='pendingCards'>
-                            <h3 ><i>{person.title}</i></h3>
-                            <p>{person.story}</p>
-                            <div className='btnDiv'>
-                                <button onClick={() => approveStory(person.id,{...person, highlight:null})} className='dashboard-button'>
-                                    Approve Story
-                                </button>
+            <h2>Pending Stories</h2>
+            <ul>
+                {   
+                    pendingStories.map((person) => {
+                        return (
+                            <li key={person.id}>
+                                <h3>{person.title}</h3>
+                                <p>{person.story}</p>
+                                <div>
+                                    <button onClick={() => approveStory(person.id,{...person, highlight:null})} className='submit-btn'>
+                                        Approve Story
+                                    </button>
 
-                                {/* End Point doesn't work */}
-                                {/* <button onClick={() => rejectStory(person.id)} className='dashboard-button'>
-                                    Reject Story
-                                </button> */}
-                            </div>
-                        </div>
-                    );
-                })
-            }
+                                    {/* End Point doesn't work */}
+                                    {/* <button onClick={() => rejectStory(person.id)} className='dashboard-button'>
+                                        Reject Story
+                                    </button> */}
+                                </div>
+                            </li>
+                        );
+                    })
+                }
+            </ul>
         </StyledContainer>	            		
 	);
 };
@@ -41,42 +43,63 @@ const Dashboard = ({ pendingStories,  getPendingStories, rejectStory, approveSto
 export default connect( state => state, actions)(Dashboard);
 
 const StyledContainer = styled.div`
-    width:100%;
-    background-color: whitesmoke;
-    margin: 0 auto;
+    padding: 35px;
+    overflow-y: auto;
+    width: calc(100% - 250px);
 
-    .pendingCards {
-        padding: 10px;
-        margin-top: 5px;
-        border-radius: 5px;
-        box-shadow: 0 -1px 0 #e0e0e0, 0 0 2px rgba(0, 0, 0, 0.12),
-            0 2px 4px rgba(0, 0, 0, 0.24);  
-        background-color: #FFEBCD;
-        margin: 10px 10px 20px 10px;
+    h2 {
+        font-size: 2.2rem;
+        margin-bottom: 3rem;
     }
 
-    .btnDiv {
-        display: flex;
-        justify-content: flex-end;
+    ul {
+        li {
+            padding: 2rem;
+            border-radius: 3px;
+            margin-bottom: 4rem;
+            box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+
+            h3 {
+                font-size: 1.7rem;
+                margin-bottom: .5rem;
+            }
+
+            p {
+                font-size: 1.4rem;
+                line-height: 1.4;
+            }
+
+            & > div {
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
     }
 
-    .dashboard-button {
-        margin:10px 5px 5px 5px;
-        padding: 5px;
-        border-radius:10px;
-        border: 1px solid gray;
-        background-color:lightgray
-    }
-
-    .dashboard-button:hover {
-        background-color: #90EE90;
-        font-size: 13.5px;
-    }
-
-    .intro {
-        font-size: 3rem;
-        text-shadow: 1px 1px 1px lightblue, 
-        3px 3px 5px darkgray;
+    button.submit-btn {
+        outline: 0;
+        background: ${props => props.theme.primaryColor};
+        border: none;
+        color: ${props => props.theme.white};
+        font-weight: 700;
         text-align: center;
+        border-radius: 5px;
+        box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34,36,38,.15) inset;
+        user-select: none;
+        transition: opacity .1s ease,background-color .1s ease,color .1s ease,box-shadow .1s ease,background .1s ease,-webkit-box-shadow .1s ease;
+        -webkit-tap-highlight-color: transparent;
+        padding: .35rem 1.5rem;
+        min-height: 35px;
+        min-width: 100px;
+        font-size: 1.3rem;
+        margin-top: 2rem;
+
+        &:hover {
+            background-color: ${props => props.theme.primaryColor};
+            background-image: none;
+            -webkit-box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34,36,38,.15) inset;
+            box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34,36,38,.15) inset;
+            color: rgba(255, 255, 255, .8);
+        }
     }
-  `
+`

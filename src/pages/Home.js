@@ -313,7 +313,6 @@ const ParallaxContainer = styled.div`
                         max-width: 400px;
                         width: 100%;
                         text-align: left;
-                        font-family: ${props => props.theme.bodyFont};
                     }
 
                     .stats {
