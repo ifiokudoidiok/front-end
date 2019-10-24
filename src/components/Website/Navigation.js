@@ -68,15 +68,19 @@ const StyledNavigation = styled.nav`
         ul {
             &.open {
                 top: 80px;
-                right: 30px; 
-
-                a:last-of-type {
-                    padding-right: 0;
+                right: 30px;
+                
+                li:last-of-type {
+                    a {
+                        padding-right: 0;
+                    }
                 }
             }  
 
-            a:last-of-type {
-                padding-right: 2rem;
+            li:last-of-type {
+                a {
+                    padding-right: 2rem;
+                }
             }
         }
 
