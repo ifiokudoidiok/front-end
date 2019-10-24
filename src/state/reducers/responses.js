@@ -1,13 +1,24 @@
 import * as types from '../types';
 
 
-
 const initialUserStoriesStatus = null;
 export const userStoriesStatusReducer = (state = initialUserStoriesStatus, actions) => {
     switch(actions.type) {
         case types.GET_USER_STORIES_SUCCESS:
             return true;
         case types.GET_USER_STORIES_FAILED:
+            return false;
+        default:
+            return state
+    }
+}
+
+const initialPendingStoriesStatus = null;
+export const pendingStoriesStatusReducer = (state = initialPendingStoriesStatus, actions) => {
+    switch(actions.type) {
+        case types.GET_PENDING_STORIES_SUCCESS:
+            return true;
+        case types.GET_PENDING_STORIES_FAILED:
             return false;
         default:
             return state

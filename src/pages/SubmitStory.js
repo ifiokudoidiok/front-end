@@ -19,23 +19,21 @@ import Navigation from "../components/Website/Navigation";
 const SubmitStory = ({ addStory, toggleAddStoryStatus, addStoryStatus }) => {
 
     const handleStorySubmit = () => {
-        startLoader();
         setAsSubmitted();
         addStory(values);
     }
 
     const handleAPIResponse = () => {
-        stopLoader();
+        stopLoading();
         resetForm();
         makeBtnNotVisible();
         toggleAddStoryStatus(false);
     }
 
-    const [ isLoading, startLoader, stopLoader ] = useDialog(false);
     const [ isAlertOpen, openAlert, closeAlert ] = useDialog(false);
     const [ hasSubmitted, setAsSubmitted, setAsNotSubmitted ] = useDialog(false);
     const [ isBtnVisible, makeBtnVisible, makeBtnNotVisible ] = useDialog(false);
-    const { values, resetForm, handleChange, handleSubmit } = useForm(handleStorySubmit);
+    const { values, resetForm, isLoading, stopLoading, handleChange, handleSubmit } = useForm(handleStorySubmit);
 
     const { title, story } = values;
 
