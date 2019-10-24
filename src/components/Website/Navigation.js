@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import logo from '../../assets/images/refugeestories-logo.png';
 
 
-const Navigation = ({ noheader }) => {
+const Navigation = ({ noheader, ishome }) => {
 
     const [ isOpen, setIsOpen ] = useState(false);
 
@@ -13,7 +13,7 @@ const Navigation = ({ noheader }) => {
     }
 
     return (
-        <StyledNavigation className={noheader ? 'no-header' : null}>
+        <StyledNavigation className={noheader ? 'no-header' : ishome ? "is-home" : null}>
             <div className="site-logo">
                 <img src={logo} alt="Refugee Stories Logo" />
             </div>
@@ -64,6 +64,31 @@ const StyledNavigation = styled.nav`
         }
     }
 
+    &.is-home {
+        ul {
+            &.open {
+                top: 80px;
+                right: 30px;
+                
+                li:last-of-type {
+                    a {
+                        padding-right: 0;
+                    }
+                }
+            }  
+
+            li:last-of-type {
+                a {
+                    padding-right: 2rem;
+                }
+            }
+        }
+
+        .responsive-nav {
+            margin-right: 2rem;
+        }
+    }
+
     .site-logo {
         max-width: 50px;
     }
@@ -94,12 +119,13 @@ const StyledNavigation = styled.nav`
             }
         }
 
-        @media (max-width: 500px) {
+        @media (max-width: 768px) {
             display: none;
 
             &.open {
                 display: flex;
                 position: absolute;
+                z-index: 4;
                 background: ${props => props.theme.primaryGrey};
                 flex-direction: column;
                 top: 60px;
@@ -127,7 +153,7 @@ const StyledNavigation = styled.nav`
                     a {
                         width: 100%;
                         color: ${props => props.theme.white};
-                        padding: 1.5rem 0 .75rem;
+                        padding: 1.2rem 0 .75rem;
                         border-bottom: 1px solid ${props => props.theme.white};
     
                         &.selected {
@@ -145,6 +171,7 @@ const StyledNavigation = styled.nav`
     
                         a {
                             border-bottom: none;
+                            padding-bottom: 1rem;
                         }
                     }
                 }
@@ -158,12 +185,12 @@ const StyledNavigation = styled.nav`
         min-width: inherit;
         position: relative;
         min-height: 0;
-        height: 20px;
+        height: 25px;
         width: 25px;
         border: none;
         outline: none;
 
-        @media (min-width: 500px) {
+        @media (min-width: 768px) {
             display: none;
         }
 

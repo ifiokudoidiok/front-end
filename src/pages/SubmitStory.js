@@ -109,6 +109,7 @@ export default connect(state => state, actions)(SubmitStory);
 
 const StyledContainer = styled.main`
     padding: 2rem;
+    min-height: 100vh;
 
     form {
         max-width: ${props => props.theme.mediumMaxWidth};

@@ -74,5 +74,15 @@ const StyledHeader = styled.header`
             max-width: 400px;
             width: 100%;
         }
+
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 4rem;
+            }
+
+            p {
+                font-size: 1.7rem;  
+            }
+        }
     }
 `
