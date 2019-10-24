@@ -1,25 +1,15 @@
 import { useState, useEffect } from 'react';
 
-
 const useForm = (callback, validate,) => {
 
 	const [values, setValues] = useState({});
 	const [errors, setErrors] = useState({});
 	const [visibility, setVisibility] = useState(false);
-	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [ isLoading, setLoading ] = useState(false);
 
 	useEffect(() => {
-
-		if (!Object.values(errors).includes(true) && isSubmitting) callback();
-	
-	}, [errors, isSubmitting]); // eslint-disable-line
-
-	useEffect(() => {
-
 		if(validate) setErrors(validate(values));
-
 	}, [values, validate])
-
 
 	const handleChange = (event) => {
 		event.persist();
@@ -31,17 +21,12 @@ const useForm = (callback, validate,) => {
 
 	const handleSubmit = (event) => {
 		if (event) event.preventDefault();
-		
-		if(validate) {
-			setErrors(validate(values));
-			setIsSubmitting(true);
-		} else {
-			callback();
-		}
+		setLoading(true);
+		callback();
 	};
 
 	const resetForm = () => setValues({});
-
+	const stopLoading = () => setLoading(false);
 	const toggleVisibility = () => {
 		if(values.password) setVisibility(!visibility)
 	}
@@ -50,6 +35,8 @@ const useForm = (callback, validate,) => {
 		errors,
 		values,
 		visibility,
+		isLoading,
+		stopLoading,
 		resetForm,
 		handleChange,
 		handleSubmit,

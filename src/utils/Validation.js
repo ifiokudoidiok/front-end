@@ -2,7 +2,7 @@ export const validationChecker = (initialState, error) => {
     return initialState ? undefined : (error ? 'invalid' : 'valid');
 }
 
-export const validation = ({ email, password }) => {
+export const validation = ({ email, password, value }) => {
     return {
         initialEmailState: (() => {
             if(!email) return true;
@@ -12,9 +12,13 @@ export const validation = ({ email, password }) => {
             if(!password) return true;
             return false;
         })(),
+        isRequired: (() => {
+            if(value) return true
+
+            return false
+        })(),
         emailMatch: (() => {
-            if(email)
-                return !(/\S+@\S+\.\S+/.test(email));
+            if(email) return !(/\S+@\S+\.\S+/.test(email));
         })(),
         minMaxMatch: (() => {
             if(password)

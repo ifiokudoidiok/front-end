@@ -19,23 +19,21 @@ import Navigation from "../components/Website/Navigation";
 const SubmitStory = ({ addStory, toggleAddStoryStatus, addStoryStatus }) => {
 
     const handleStorySubmit = () => {
-        startLoader();
         setAsSubmitted();
         addStory(values);
     }
 
     const handleAPIResponse = () => {
-        stopLoader();
+        stopLoading();
         resetForm();
         makeBtnNotVisible();
         toggleAddStoryStatus(false);
     }
 
-    const [ isLoading, startLoader, stopLoader ] = useDialog(false);
     const [ isAlertOpen, openAlert, closeAlert ] = useDialog(false);
     const [ hasSubmitted, setAsSubmitted, setAsNotSubmitted ] = useDialog(false);
     const [ isBtnVisible, makeBtnVisible, makeBtnNotVisible ] = useDialog(false);
-    const { values, resetForm, handleChange, handleSubmit } = useForm(handleStorySubmit);
+    const { values, resetForm, isLoading, stopLoading, handleChange, handleSubmit } = useForm(handleStorySubmit);
 
     const { title, story } = values;
 
@@ -191,6 +189,7 @@ const StyledContainer = styled.main`
             min-height: 40px;
             min-width: 150px;
             font-size: 1.5rem; 
+            margin-top: 2rem;
 
             &.is-active {
                 background-color: ${props => props.theme.primaryColor};

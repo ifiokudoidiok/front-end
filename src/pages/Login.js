@@ -1,64 +1,86 @@
 import React from "react";
-import styled from 'styled-components'
-import Roller from '../utils/rolerIndicator'
-import useForm from '../utils/hooks/useForm';
 import axios from 'axios';
+import styled from 'styled-components';
+import useForm from '../utils/hooks/useForm';
 import {validation, validationChecker } from '../utils/Validation';
 import Header from '../components/Website/Header';
-import { resetWarningCache } from "prop-types";
+import Roller from '../components/LoadingIndicator/roller';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Login = (props) => {
     
     const adminLogin = () => {
-    axios.post('https://bwrefugeestories.herokuapp.com/api/auth/login', values)
-        .then(res => {
-            localStorage.setItem('token', res.data.token);
-            props.history.push('/dashboard');
-        })
-        .catch(err=>{
-            alert(err.response.statusText + ", Please provide valid Email and Password")
-            resetForm()
-        })
+        axios.post('https://bwrefugeestories.herokuapp.com/api/auth/login', values)
+            .then(res => {       
+                localStorage.setItem('token', res.data.token);
+                stopLoading();
+                props.history.push('/dashboard');
+            })
+            .catch(err => {
+                toast.error("Please provide valid Email and Password!")
+                stopLoading();
+                resetForm();
+            })
     }
 
-    const { values, errors, isLoading, visibility, handleChange, handleSubmit, toggleVisibility, resetForm } = useForm(adminLogin, validation);
+    const { 
+        values, 
+        errors, 
+        visibility,
+        isLoading,
+        stopLoading, 
+        handleChange, 
+        handleSubmit, 
+        toggleVisibility, 
+        resetForm 
+    } = useForm(adminLogin, validation);
     const { email, password } = values;
-    const { initialEmailState, emailMatch, minMaxMatch, numberRequired,initialPasswordState } = errors;
+    const { 
+        initialEmailState, 
+        initialPasswordState,
+        isRequired,
+        emailMatch
+    } = errors;
 
     return (
-        <StyledDiv >
-        <Header 
-                height="45vh"
+        <StyledDiv>
+            <Header 
+                height="25vh"
                 image = "https://source.unsplash.com/featured/?refugees,refugee"
             />
 
-            <h3>Please Enter Log-In Details below</h3>
-        <form>
-            <label htmlFor="email">
-                <span>Email</span>
-                <input id="email" type="email" value={email || ''} onChange={handleChange} required />
-                <ul className="input-requirements">
-					<li className={validationChecker(initialEmailState, emailMatch)}>Contains valid email format</li>
-                </ul>
-            </label>
+            <div className="page-content">
+                <h3>Welcome! Login to the admin dashboard</h3>
 
-            <label htmlFor="password">
-                <span className="password-label">
-                    <span>Password</span>
-                    <button type="button" onClick={toggleVisibility}>{visibility ? 'Hide password' : 'Show password'}</button>
-                </span>
-                <input id="password" type={visibility ? 'text' : 'password'} value={password || ''} onChange={handleChange} required />               
-                <ul className="input-requirements">
-					<li className={validationChecker(initialPasswordState, minMaxMatch)}>At least 11 characters long (and less than 100 characters)</li>
-					<li className={validationChecker(initialPasswordState, numberRequired)}>Contains at least 1 number</li>
-				</ul>
-            </label>
-            <button type="submit" className="submit-btn" onClick={handleSubmit}>
-                {isLoading ? <Roller /> : 'Submit'}
-            </button>
-        </form>
-    </StyledDiv>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="email">
+                        <span>Email</span>
+                        <input id="email" type="email" value={email || ''} onChange={handleChange} required />
+                        <ul className="input-requirements">
+                            <li className={validationChecker(initialEmailState, emailMatch)}>Email Address is in correct format</li>
+                            <li className={validationChecker(initialEmailState, isRequired)}>Email Address is required</li>
+                        </ul>
+                    </label>
+
+                    <label htmlFor="password">
+                        <span className="password-label">
+                            <span>Password</span>
+                            <button type="button" onClick={toggleVisibility}>{visibility ? 'Hide password' : 'Show password'}</button>
+                        </span>
+                        <input id="password" type={visibility ? 'text' : 'password'} value={password || ''} onChange={handleChange} required />               
+                        <ul className="input-requirements">
+                            <li className={validationChecker(initialPasswordState, isRequired)}>Password is required</li>
+                        </ul>
+                    </label>
+
+                    <button type="submit" className="submit-btn">
+                        {isLoading ? <Roller /> : 'Login'}
+                    </button>
+                </form>
+            </div>
+        </StyledDiv>
     )
 }
 
@@ -66,22 +88,39 @@ export default Login;
 
 
 const StyledDiv = styled.div`
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 
-    h3{
-        text-align: center;
-        font-size: 2rem;
-        margin-top: 3%;
+    header {
+        flex: 0 1 auto;
     }
 
-    form{
-        background-color: #fff;
-        max-width: 600px;
-        margin: 1% auto;
-        margin-bottom: 5%;
-        padding: 3rem;
-        box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.3);
-        border-bottom: 5px solid #ffdb3a;
+    .page-content {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+
+        h3 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+        }
+    
+        form {
+            max-width: 450px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 5rem 3rem 4rem;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+        }
     }
+
     .input-requirements {
         font-size: 1rem;
         font-style: italic;
@@ -110,10 +149,10 @@ const StyledDiv = styled.div`
         display: flex;
         flex-direction: column;
         width: 100%; 
-        margin-bottom: 1.5rem;   
+        margin-bottom: 2rem;   
         & > span {
-            font-size: 1.3rem;
-            margin-bottom: .5rem;
+            font-size: 1.5rem;
+            margin-bottom: .75rem;
             font-weight: 600;
             color: rgba(0,0,0,.4);
             &.password-label {
@@ -122,7 +161,7 @@ const StyledDiv = styled.div`
                 align-items: flex-end;
                 button {
                     color: #000;
-                    font-size: .7rem;
+                    font-size: 1rem;
                     background: transparent;
                     margin: 0;
                     padding: 0;
@@ -178,6 +217,7 @@ const StyledDiv = styled.div`
         min-height: 40px;
         min-width: 200px;
         font-size: 1.5rem; 
+        margin-top: 1.5rem;
         &:hover {
             background-color: #63ADB1;
             background-image: none;

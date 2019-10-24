@@ -103,7 +103,7 @@ export const getVolunteerPlaces = () => dispatch => {
      
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-            axios.get(`https://api.foursquare.com/v2/venues/search?ll=${position.coords.latitude},${position.coords.longitude}&client_id=${process.env.REACT_APP_FOURSQUARE_CLIENT_ID}&client_secret=${process.env.REACT_APP_FOURSQUARE_CLIENT_SECRET}&v=20191024&query=hospitals,church`)
+            axios.get(`https://api.foursquare.com/v2/venues/search?ll=${position.coords.latitude},${position.coords.longitude}&client_id=${process.env.REACT_APP_FOURSQUARE_CLIENT_ID}&client_secret=${process.env.REACT_APP_FOURSQUARE_CLIENT_SECRET}&v=20191024&query=hospital,church,school`)
                 .then(response => {
                     dispatch({
                         type: types.GET_VOLUNTEER_PLACES, 

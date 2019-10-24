@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import PrivateRoute from '../Router/PrivateRoute';
 import Dashboard from "../../pages/Dashboard";
 import ApprovedStories from "../../pages/ApprovedStories";
-
+import logo from '../../assets/images/refugeestories-logo.png';
 import styled from 'styled-components';
-import avatar from '../../utils/photo/avatar.png';
+import Icon from '@material-ui/core/Icon';
 
 
 const DashboardLayout = props => {
@@ -16,18 +16,40 @@ const DashboardLayout = props => {
 
     return (
         <StyledContainer>
-            <div className='adminSection'>
-                <div>
-                    <img src={avatar} alt="Avatar" className="avatar" />
-                    <p><i> Welcome Admin-01</i></p>
-                    <p><i>CLick Here to edit profile</i></p>
+            <div className='side-nav'>
+                <div className="site-logo">
+                    <img src={logo} alt="Refugee Stories Logo" />
                 </div>
-                <div className='admin-actions'>
-                    <p><Link to='/'><i>Home Page</i> </Link></p>
-                    <p><Link to='/dashboard'><i>Pending Stories</i> </Link></p>
-                    <p><Link to='/dashboard/approved-stories'><i>Approved Stories</i> </Link></p>
-                    <button className='logout' onClick={onLogout}>Log Out</button>
-                </div>
+
+                <ul>
+                    <li>
+                        <NavLink exact to="/" activeClassName="is-active">
+                            <Icon>open_in_new</Icon>
+                            <span>Visit Site</span>
+                        </NavLink>
+                    </li>
+                    
+                    <li>
+                        <NavLink exact to="/dashboard" activeClassName="is-active">
+                            <Icon>assignment_late_outline</Icon>
+                            <span>Pending Stories</span>
+                        </NavLink>
+                    </li>
+
+                    <li>
+                        <NavLink exact to="/dashboard/approved-stories" activeClassName="is-active">
+                            <Icon>check_circle</Icon>
+                            <span>Approved Stories</span>
+                        </NavLink>
+                    </li>
+
+                    <li>
+                        <button className='logout' onClick={onLogout}>
+                            <Icon>exit_to_app</Icon>
+                            <span>Log Out</span>
+                        </button>
+                    </li>
+                </ul>
             </div>
 
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
@@ -40,41 +62,68 @@ export default DashboardLayout;
 
 const StyledContainer = styled.div`
     display: flex;
-    justify-content: space-between;
-    font-size: 16px;
-    background-color: #D3D3D3;
+    height: 100vh;
+    overflow: hidden;
 
-    .adminSection {
+
+    .side-nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         max-width: 250px;
-        width:100%;
-        text-align: center;
-        margin-top: 5%;
-    }
+        width: 100%
+        height: 100vh;
+        overflow: hidden;
+        background: #fafafa;
+        position: relative;
+        padding: 2rem;
+        padding-right: 0;
 
-    .avatar {
-        vertical-align: middle;
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-    }
+        .site-logo {
+            max-width: 40px;
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+        }
 
-    .logout {
-        color:dodgerblue;
-        padding:3px 5px;
-        margin:10px 5px 5px 5px;
-        border: 1px solid gray;
-        border-radius:10px;
-        background-color:lightgray
-    }
+        ul {
+            min-height: 450px;
+            width: 100%;
 
-    .logout:hover {
-        border: 3px solid #F08080;
-        color:red;
-    }
+            a, button {
+                display: flex;
+                align-items: center;
+                font-weight: 400
+                padding: 10px 0;
+                font-size: 1.6rem;
+                color: ${props => props.theme.black};
+                font-family: ${props => props.theme.bodyFont};
 
-    .admin-actions {
-        margin: 10px 5px;
-        border: 2px solid gray
+                .MuiIcon-root {
+                    margin-top: 5px
+                }
+
+                span {
+                    margin-left: 0px;
+                    margin-right: 10px;
+                }
+
+                &:hover, &.is-active {
+                    font-weight: 600px
+                    color: ${props => props.theme.primaryColor};
+                }
+
+                &.is-active {
+                    border-right: 3px solid ${props => props.theme.primaryColor};
+                }
+            }
+
+            button {
+                background: transparent;
+                border: none; 
+                outline: none;
+            }
+        }
     }
 
     a:hover{
