@@ -18,7 +18,7 @@ export const validation = ({ email, password }) => {
         })(),
         minMaxMatch: (() => {
             if(password)
-                return !(password.length > 6 && password.length < 100);
+                return !(password.length > 11 && password.length < 100);
         })(),
         numberRequired: (() => {
             if(password)

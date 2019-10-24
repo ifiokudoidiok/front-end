@@ -42,12 +42,13 @@ const StyledContainer = styled.div`
     display: flex;
     justify-content: space-between;
     font-size: 16px;
+    background-color: #D3D3D3;
 
     .adminSection {
         max-width: 250px;
         width:100%;
-        background-color: #D3D3D3;
         text-align: center;
+        margin-top: 5%;
     }
 
     .avatar {
@@ -60,6 +61,10 @@ const StyledContainer = styled.div`
     .logout {
         color:dodgerblue;
         padding:3px 5px;
+        margin:10px 5px 5px 5px;
+        border: 1px solid gray;
+        border-radius:10px;
+        background-color:lightgray
     }
 
     .logout:hover {
@@ -71,4 +76,10 @@ const StyledContainer = styled.div`
         margin: 10px 5px;
         border: 2px solid gray
     }
+
+    a:hover{
+        font-size: 19px;
+        color: black;
+    }
+
 `

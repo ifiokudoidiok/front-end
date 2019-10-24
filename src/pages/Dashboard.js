@@ -43,7 +43,7 @@ export default connect( state => state, actions)(Dashboard);
 const StyledContainer = styled.div`
     width:100%;
     background-color: whitesmoke;
-    margin: 0 auto;
+    margin-top: 2.5%;
 
     .pendingCards {
         padding: 10px;
