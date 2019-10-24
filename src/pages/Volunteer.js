@@ -122,6 +122,12 @@ const StyledMapContainer = styled.div`
             h2 {
                 font-size: 5rem;
             }
+
+            p {
+                font-size: 2rem;
+                margin-top: .5rem;
+                max-width: 400px;    
+            }
         }
     }
 
