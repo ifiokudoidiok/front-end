@@ -4,7 +4,7 @@ import Home from '../../pages/Home';
 import Stories from '../../pages/Stories';
 import SubmitStory from '../../pages/SubmitStory';
 import SingleUserStory from "../../pages/SingleUserStory";
-import Map from "../../pages/Connect";
+import Volunteer from "../../pages/Volunteer";
 
 
 const WebsiteRouter = () => (
@@ -13,7 +13,7 @@ const WebsiteRouter = () => (
         <Route exact path="/stories/:id" component={SingleUserStory} />
         <Route exact path="/stories" component={Stories} />
         <Route path="/submit-story" component={SubmitStory} />
-        <Route path="/connect" component={Map} />
+        <Route path="/volunteer" component={Volunteer} />
     </>
 );
 

@@ -6,10 +6,9 @@ import { theme } from './styles/theme.styles';
 import { GlobalStyles } from './styles/global.styles';
 import { ThemeProvider } from 'styled-components';
 import { ToastContainer } from 'react-toastify';
-import WebsiteLayout from './components/Layout/WebsiteLayout';
-import OnboardingLayout from './components/Layout/OnboardingLayout';
-import DashboardLayout from './components/Layout/DashboardLayout';
-
+import WebsiteRouter from './components/Router/WebsiteRouter';
+import OnboardingRouter from './components/Router/OnboardingRouter';
+import DashboardRouter from './components/Router/DashboardRouter';
 
 
 const App = () => {
@@ -18,9 +17,11 @@ const App = () => {
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <GlobalStyles />
-          <WebsiteLayout />
-          <OnboardingLayout />
-          <DashboardLayout />
+
+            <WebsiteRouter />
+            <OnboardingRouter />
+            <DashboardRouter />
+  
           <ToastContainer />
         </ThemeProvider>
       </BrowserRouter>

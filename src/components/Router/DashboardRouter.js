@@ -1,14 +1,12 @@
 import React from "react";
 import PrivateRoute from './PrivateRoute';
-import Dashboard from "../../pages/Dashboard";
-import ApprovedStories from "../../pages/ApprovedStories";
+import DashboardLayout from "../Layout/DashboardLayout";
 
 
 const DashboardRouter = () => (
-    <>
-        <PrivateRoute path="/admin" component={Dashboard} />
-        <PrivateRoute path="/approved-stories" component={ApprovedStories} />
-    </>
-);
+
+    <PrivateRoute path="/dashboard" component={DashboardLayout} />
+
+)
 
 export default DashboardRouter;

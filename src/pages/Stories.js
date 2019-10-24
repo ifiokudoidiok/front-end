@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux"
 import * as actions from '../state/actions';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { imageBank } from "../utils/data";
@@ -11,10 +12,18 @@ import Roller from "../components/LoadingIndicator/roller";
 
 const Stories = ({ getUserStories, userStories, userStoriesStatus }) => {
 
+    const [ isLoading, setLoader ] = useState(true);
 
     useEffect(() => {
         getUserStories();
     }, [userStories]) // eslint-disable-line
+
+    useEffect(() => {
+        if(userStoriesStatus === false && isLoading) {
+            toast.error("Oops, something went wrong. Try again!");
+            setLoader(false);
+        }
+    }, [userStoriesStatus, isLoading])
 
     return (
         <>
@@ -26,15 +35,15 @@ const Stories = ({ getUserStories, userStories, userStoriesStatus }) => {
             />
             <StyledContainer>
                 {   
-                    !userStoriesStatus ? (
+                    !userStoriesStatus && isLoading ? (
                         <div className="loading-indicator">
                             <Roller isSiteWide={true} />
                         </div>
                     ) : (
                         <ul>
                             {
-                                userStories.map(({id, title, story}, index) => {
-                                    const image = imageBank[index];
+                                userStories.map(({id, title, story}) => {
+                                    const image = imageBank.filter((item, index) => index === (id - 1))[0] || "https://source.unsplash.com/1600x900/?refugees,refugee";
                                     return (
                                         <li key={id}>
                                             <div className="card-content">
@@ -43,7 +52,7 @@ const Stories = ({ getUserStories, userStories, userStoriesStatus }) => {
                                                 <Link to={`/stories/${id}`}>Read full story <span>&#62;</span></Link>
                                             </div>
                                             <div className="card-image">
-                                                <img src={image} alt="Randomized refugee resource from Unsplash" />
+                                                <img src={image} alt={title} />
                                             </div>
                                         </li>
                                     )

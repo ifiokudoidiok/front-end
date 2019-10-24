@@ -8,10 +8,9 @@ import Roller from "../components/LoadingIndicator/roller";
 
 const ApprovedStories = ({ getUserStories, userStories, userStoriesStatus, deleteStory }) => {
 
-
     useEffect(() => {
         getUserStories();
-    }, [userStories])
+    }, [userStories]) // eslint-disable-line
 
     return (
         <StyledContainer>
