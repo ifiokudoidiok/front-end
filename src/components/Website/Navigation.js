@@ -68,7 +68,7 @@ const StyledNavigation = styled.nav`
         ul {
             &.open {
                 top: 80px;
-                right: 30px;
+                right: 10px;
                 
                 li:last-of-type {
                     a {
@@ -82,10 +82,6 @@ const StyledNavigation = styled.nav`
                     padding-right: 2rem;
                 }
             }
-        }
-
-        .responsive-nav {
-            margin-right: 2rem;
         }
     }
 

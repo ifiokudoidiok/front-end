@@ -23,7 +23,6 @@ export default Header;
 
 const StyledHeader = styled.header`
     position: relative;
-    overflow: hidden;
     padding: 2rem;
     padding-bottom: 6rem;
     height: ${props => props.height};

@@ -64,7 +64,7 @@ const Home = ({ getUserStories, userStories, userStoriesStatus }) => {
                 <section className="blog-section">
                     <div className="statistics">
                         <p className="stats">17m</p>
-                        <p class="stats-summary">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                        <p className="stats-summary">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
                     </div>
                     <div className="recent-posts">
                         {   
