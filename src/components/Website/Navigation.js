@@ -21,6 +21,7 @@ const Navigation = ({ noheader }) => {
                <li onClick={toggleNav}><NavLink activeClassName='selected' exact to="/">Home</NavLink></li> 
                <li onClick={toggleNav}><NavLink activeClassName='selected' to="/stories">Stories</NavLink></li> 
                <li onClick={toggleNav}><NavLink activeClassName='selected' to="/submit-story">Submit Story</NavLink></li> 
+               <li onClick={toggleNav}><NavLink activeClassName='selected' to="/volunteer">Volunteer</NavLink></li> 
                {
                     localStorage.getItem('token') && 
                         <li onClick={toggleNav}><NavLink activeClassName='selected' to="/dashboard">My Dashboard</NavLink></li>  

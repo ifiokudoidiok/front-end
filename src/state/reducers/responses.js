@@ -25,3 +25,15 @@ export const addStoryStatusReducer = (state = initialaddStoryStatus, actions) =>
             return state
     }
 }
+
+const initialVolunteerPlacesStatus = null;
+export const volunteerPlacesStatusReducer = (state = initialVolunteerPlacesStatus, actions) => {
+    switch(actions.type) {
+        case types.GET_VOLUNTEER_PLACES_SUCCESS:
+            return true;
+        case types.GET_VOLUNTEER_PLACES_FAILED:
+            return false;
+        default:
+            return state
+    }
+}

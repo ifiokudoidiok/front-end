@@ -5,21 +5,6 @@ import withAuth from '../../utils/axios';
 
 axios.defaults.baseURL = 'https://bwrefugeestories.herokuapp.com/';
 
-export const toggleAddStoryStatus = (bool) => {
-    if(bool) {
-        return {
-            type: types.SUBMIT_STORY_SUCCESS, 
-            payload: bool
-        }
-    } else {
-        return {
-            type: types.SUBMIT_STORY_FAILED, 
-            payload: bool
-        }
-    }
-}
-
-
 export const getUserStories = () => dispatch => {
     axios.get('/api/stories')
         .then(response => {
@@ -39,7 +24,6 @@ export const getUserStories = () => dispatch => {
             })
         })
 }
-
 
 export const getPendingStories = () => dispatch => {
     withAuth().get('/api/admin/stories')
@@ -72,6 +56,19 @@ export const addStory = (story) => dispatch => {
         })
 }
   
+export const toggleAddStoryStatus = (bool) => {
+    if(bool) {
+        return {
+            type: types.SUBMIT_STORY_SUCCESS, 
+            payload: bool
+        }
+    } else {
+        return {
+            type: types.SUBMIT_STORY_FAILED, 
+            payload: bool
+        }
+    }
+}
 
 export const approveStory = (id, story) => dispatch => {
     withAuth().post(`/api/admin/stories/approve/${id}`, story)
@@ -83,7 +80,6 @@ export const approveStory = (id, story) => dispatch => {
         .catch(error => console.log(error))
 }
 
-
 export const rejectStory = (id) => dispatch => {
     axios.delete(`/api/admin/stories/reject/${id}`)
         .then(res => {
@@ -94,7 +90,6 @@ export const rejectStory = (id) => dispatch => {
         .catch(error => console.log(error))
 }
 
-
 export const deleteStory = (id) => dispatch => {
     withAuth().delete(`/api/admin/stories/delete/${id}`)
         .then(res => {
@@ -103,4 +98,26 @@ export const deleteStory = (id) => dispatch => {
             });
         })
         .catch(error => console.log(error))
+}
+export const getVolunteerPlaces = () => dispatch => {
+     
+    if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            axios.get(`https://api.foursquare.com/v2/venues/search?ll=${position.coords.latitude},${position.coords.longitude}&client_id=${process.env.REACT_APP_FOURSQUARE_CLIENT_ID}&client_secret=${process.env.REACT_APP_FOURSQUARE_CLIENT_SECRET}&v=20191024&query=hospitals,church`)
+                .then(response => {
+                    dispatch({
+                        type: types.GET_VOLUNTEER_PLACES, 
+                        payload: response.data
+                    });
+                    dispatch({
+                        type: types.GET_VOLUNTEER_PLACES_SUCCESS, 
+                        payload: true
+                    })
+                })
+                .catch(error => console.log(error.message))
+        });
+    } else {
+        alert("Sorry, browser does not support geolocation!");
+    }
+    
 }
