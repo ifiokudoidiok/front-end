@@ -23,7 +23,7 @@ const DashboardLayout = props => {
 
                 <ul>
                     <li>
-                        <NavLink exact to="/" activeClassName="is-active">
+                        <NavLink exact to="/stories" activeClassName="is-active">
                             <Icon>open_in_new</Icon>
                             <span>Visit Site</span>
                         </NavLink>

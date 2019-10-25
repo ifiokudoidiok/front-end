@@ -29,8 +29,8 @@ const Stories = ({ getUserStories, userStories, userStoriesStatus }) => {
         <>
             <Header 
                 height="60vh"
-                title="Stories Page :)"  
-                story="Welcome to the stories page. I sure i'm glad that you're here"
+                title="All Stories"  
+                story="Learn how and why refugee crises have shaped our world over the last half-century through real stories"
                 image="https://images.unsplash.com/photo-1544006790-b3c81bd2fe74?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
             />
             <StyledContainer>
