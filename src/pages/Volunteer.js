@@ -9,24 +9,24 @@ import Roller from "../components/LoadingIndicator/roller";
 
 
 const Volunteer = ({ volunteerPlaces, volunteerPlacesStatus, getVolunteerPlaces }) => {
-
-    const [geolocation, setGeolocation] = useState({});
+    
     const [selectedOrg, setSelectedOrg] = useState(null);
     const [viewport, setViewport] = useState({
         width: '100%',
         height: '100vh',
-        latitude: 6.5243793,
-        longitude: 3.3792057,
-        zoom: 13
+        latitude: 0,
+        longitude: 0,
+        zoom: 10
     })
 
     useEffect(() => {
         getVolunteerPlaces();
         if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
-                setGeolocation({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
+                setViewport({
+                    ...viewport,
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
                 })
             });
         } else {
@@ -34,22 +34,14 @@ const Volunteer = ({ volunteerPlaces, volunteerPlacesStatus, getVolunteerPlaces 
         }
     }, []) //eslint-disable-line
 
-    useEffect(() => {
-        setViewport({
-            ...viewport,
-            lat: geolocation.lat,
-            lng: geolocation.lng
-        })
-    }, [geolocation]) //eslint-disable-line
-
 
     return (
         <StyledMapContainer>
             <header>
                 <Navigation noheader />
                 <div className="page-content">
-                    <h2>Join the volunteer communities</h2>
-                    <p>Welcome to the stories page. I sure i'm glad that you're here</p>
+                    <h2>Be a part of change</h2>
+                    <p>Volunteer with any refugee organizations near you. Click the icon to get more information.</p>
                 </div>
             </header>
             {

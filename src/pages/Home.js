@@ -58,13 +58,16 @@ const Home = ({ getUserStories, userStories, userStoriesStatus }) => {
             </header>
             <main>
                 <section className="about-section">
-                    <h3>Hello World!</h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                    <h3>Who We Are!</h3>
+                    <p> We are an organization committed to saving the lives and protecting the rights, dignity, and security of refugees and displaced people worldwide by sharing their stories. We are a global, independent advocacy organization that successfully challenges governments, policymakers, and administrations to improve the lives of displaced people around the world.</p>
                 </section>
                 <section className="blog-section">
                     <div className="statistics">
-                        <p className="stats">17m</p>
-                        <p className="stats-summary">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                        <div>
+                            <p className="stats">71 million </p>
+                            <p className="stats-summary">people have been displaced from their home due to war, persecution or violence. That’s one of every 107 people on the planet.</p>
+                            <Link to="/stories">See all stories <span>&#62;</span></Link>
+                        </div>
                     </div>
                     <div className="recent-posts">
                         {   
@@ -215,7 +218,7 @@ const ParallaxContainer = styled.div`
         }
 
         .about-section {
-            max-width: 768px;
+            max-width: 850px;
             margin: 0 auto;
             padding: 7rem 2rem;
             flex: 0 1 auto;
@@ -224,14 +227,14 @@ const ParallaxContainer = styled.div`
             justify-content: space-between;
 
             h3 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
                 max-width: 250px;
                 width: 100%; 
                 margin-right: 2rem;           
             }
 
             p {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
                 line-height: 1.6;
                 width: calc(100% - 300px);
             }
@@ -257,7 +260,6 @@ const ParallaxContainer = styled.div`
         .blog-section {
             display: flex;
             flex: 1 1 auto;
-
 
             & > div {
                 background: #f2f6f5;
@@ -308,21 +310,34 @@ const ParallaxContainer = styled.div`
                 }
 
                 &.statistics {
-                    .stats,
-                    .stats-summary {
-                        max-width: 400px;
+                    & > div {
+                        max-width: 450px;
                         width: 100%;
                         text-align: left;
                     }
 
                     .stats {
-                        font-size: 8rem;
-                        letter-spacing: -10px;
+                        font-size: 7rem;
+                        letter-spacing: -5px;
+                        font-family: ${props => props.theme.headingFont};
                     }
 
                     .stats-summary {
                         font-size: 1.7rem;
                         line-height: 1.5;
+                    }
+
+                    a {
+                        color: ${props => props.theme.primaryColor};
+                        margin-top: 2rem;
+                        font-size: 1.7rem;
+                        width: fit-content;
+                        display: inline-block;
+                        border-bottom: 3px solid transparent;
+
+                        &:hover {
+                            border-bottom: 3px solid ${props => props.theme.primaryColor};
+                        }
                     }
                 }
             }
@@ -337,16 +352,15 @@ const ParallaxContainer = styled.div`
                     &.statistics {
                         padding: 3rem 2rem 4.5rem;
 
-                        .stats,
-                        .stats-summary {
+                        & > div {
                             max-width: 300px;
                             width: 100%;
                             text-align: center;
-                        }
 
-                        .stats {
-                            font-size: 6rem;
-                            letter-spacing: -5px;                        
+                            .stats {
+                                font-size: 6rem;
+                                letter-spacing: -5px;                        
+                            }
                         }
                     }
                 }
