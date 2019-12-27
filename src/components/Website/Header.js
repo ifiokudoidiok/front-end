@@ -4,10 +4,12 @@ import Navigation from './Navigation';
 
 
 const Header = ({ image, height, title, story }) => {
+     image = 'https://res.cloudinary.com/menadio/image/upload/v1577188852/IMG_4485_muavsp.jpg';
     return (
         <StyledHeader height={height}>
             <div className="hero-background">
-                <img src={`${image} || https://source.unsplash.com/1600x900/?refugees,refugee`} alt="Randomized refugee resource from Unsplash" />
+                {/* <img src={`${image} || https://source.unsplash.com/1600x900/?refugees,refugee`} alt="Randomized refugee resource from Unsplash" /> */}
+                <img src={image} alt="Randomized refugee resource from Unsplash" />
             </div>
             <div className="hero-content">
                 <Navigation />
