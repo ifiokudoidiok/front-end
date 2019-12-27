@@ -64,11 +64,11 @@ const StyledContainer = styled.main`
             line-height: 1.58;
             margin: 0 auto;
             margin-top: 3rem;
-            max-width: 500px;
+            max-width: 700px;
         }
 
         .featured-image {
-            height: 500px;
+            height: 700px;
             position: relative;
 
             img {
