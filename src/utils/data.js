@@ -22,17 +22,17 @@ export const imageBank = [
 export const slides = [
     {
         image: "https://res.cloudinary.com/menadio/image/upload/v1577188901/IMG_4345_lmrtlh.jpg",
-        title: "Small Gist",
-        story: "After eight years of war, more than half the population of Syria has been forced to flee their homes, with 6.2 million people currently internally displaced and 5.6 million refugees."
+        title: "One",
+        story: "Talking to you is like sipping the most delicious wine – I want it to last forever."
     },
     {
         image: "https://res.cloudinary.com/menadio/image/upload/v1577188870/IMG_8671_uayeg1.jpg",
-        title: "Another Gist",
-        story: "Many children have lost a close relative or have a parent or sibling, and thousands have been orphaned or separated from their families in the chaos of war. Many have missed years of education, with 2.1 million children currently out of school."
+        title: "Two",
+        story: "Countless times, I’ve caught myself smiling, lost in deep thoughts of you"
     },
     {
         image: "https://res.cloudinary.com/menadio/image/upload/v1577189745/6e3352ab-456e-4540-ba9e-7c50f80b252d_h20gdw.jpg",
-        title: "LAst Gist",
-        story: "There are now 70.8 million people forced from home around the world, more than at any time in modern history. These are people who have fled extreme danger, whether to escape relentless bombing, an invading army, gang violence, or other life-threatening circumstances."
+        title: "Third",
+        story: "You are always with me, even when you are far away. Our memories together will not fade away in my mind, and they will always be in my heart."
     },
 ]
