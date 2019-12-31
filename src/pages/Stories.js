@@ -28,7 +28,7 @@ const Stories = ({ getUserStories, userStories, userStoriesStatus }) => {
       <Header
         height="60vh"
         title="Happy Birthday Babykins ❤️"
-        story="I have alot of things I want to say to you, I decided to use some of our pictures to say them. I hope you love this"
+        story="Thanks for all the memories you’ve given to me. No matter how old we get, and how many more birthdays we celebrate, I will always be here for you. Happy Birthday."
         image="https://res.cloudinary.com/menadio/image/upload/v1577440354/IMG_4485_muavsp.jpg"
       />
       <StyledContainer>

@@ -44,7 +44,7 @@ const Home = ({ getUserStories, userStories, userStoriesStatus }) => {
                 <img src={image} data-flickity-lazyload={image} alt="" />
               </div>
               <div className="slider-content">
-                <h1>{title}</h1>
+                {/* <h1>{title}</h1> */}
                 <p>{story}</p>
                 <Link to="/stories">
                   See all stories <span>&#62;</span>
@@ -56,25 +56,18 @@ const Home = ({ getUserStories, userStories, userStoriesStatus }) => {
       </header>
       <main>
         <section className="about-section">
-          <h3>Who We Are!</h3>
+          <h3>Rhoda...</h3>
           <p>
             {" "}
-            We are an organization committed to saving the lives and protecting
-            the rights, dignity, and security of refugees and displaced people
-            worldwide by sharing their stories. We are a global, independent
-            advocacy organization that successfully challenges governments,
-            policymakers, and administrations to improve the lives of displaced
-            people around the world.
+            I have alot of things I want to say to you, I decided to use some of our pictures to say them. I hope you love this
           </p>
         </section>
         <section className="blog-section">
           <div className="statistics">
             <div>
-              <p className="stats">71 million </p>
+              <p className="stats">1,053 days </p>
               <p className="stats-summary">
-                people have been displaced from their home due to war,
-                persecution or violence. That’s one of every 107 people on the
-                planet.
+              It has been 1053 days since we started dating and not once have i regretted making that decision. Each time I look at you, I just smile to myself and think, ‘I certainly could not have done better’. You are perfect the way you are. I love you honey and I bless the day i met you
               </p>
               <Link to="/stories">
                 See all stories <span>&#62;</span>
