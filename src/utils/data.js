@@ -1,6 +1,6 @@
 export const imageBank = [
     "https://res.cloudinary.com/menadio/image/upload/v1577189745/6e3352ab-456e-4540-ba9e-7c50f80b252d_h20gdw.jpg",
-    "https://res.cloudinary.com/menadio/image/upload/v1577445446/IMG_1386_qd047g.jpg",
+    "http://res.cloudinary.com/menadio/image/upload/v1577446271/IMG_1386_qd047g.jpg",
     "https://res.cloudinary.com/menadio/image/upload/v1577188901/IMG_4345_lmrtlh.jpg",
     "http://res.cloudinary.com/menadio/image/upload/v1577443033/IMG_2096_hqo86k.jpg",
     "https://res.cloudinary.com/menadio/image/upload/v1577188886/IMG_1605_ukzoyn.jpg",
