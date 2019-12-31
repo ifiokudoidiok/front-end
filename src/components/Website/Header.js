@@ -4,7 +4,7 @@ import Navigation from './Navigation';
 
 
 const Header = ({ image, height, title, story }) => {
-     image = 'https://res.cloudinary.com/menadio/image/upload/v1577188852/IMG_4485_muavsp.jpg';
+     image = 'https://res.cloudinary.com/menadio/image/upload/v1577188870/bd8c6190-e156-4786-b990-f4dc6f72c06f_p5pkus.jpg';
     return (
         <StyledHeader height={height}>
             <div className="hero-background">

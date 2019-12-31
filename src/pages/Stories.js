@@ -29,7 +29,7 @@ const Stories = ({ getUserStories, userStories, userStoriesStatus }) => {
         height="60vh"
         title="Happy Birthday Babykins ❤️"
         story="I have alot of things I want to say to you, I decided to use some of our pictures to say them. I hope you love this"
-        image="https://images.unsplash.com/photo-1544006790-b3c81bd2fe74?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
+        image="https://res.cloudinary.com/menadio/image/upload/v1577440354/IMG_4485_muavsp.jpg"
       />
       <StyledContainer>
         {!userStoriesStatus && isLoading ? (
@@ -105,7 +105,7 @@ const StyledContainer = styled.main`
 
         .card-content,
         .card-image {
-            min-height: 300px;
+            min-height: 400px;
             width: 50%;
             position: relative;
 
@@ -165,8 +165,10 @@ const StyledContainer = styled.main`
             .card-content,
             .card-image {
                 width: 100%;
+                
 
                 img {
+                  
                     border-top-left-radius: 0;
                     border-top-right-radius: 0;
                     border-bottom-left-radius: 5px;
