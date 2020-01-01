@@ -3,7 +3,7 @@ import * as types from '../types';
 import withAuth from '../../utils/axios';
 
 
-axios.defaults.baseURL = 'https://rhodaiu.herokuapp.com/';
+axios.defaults.baseURL = 'https://rhodai.herokuapp.com/';
 
 export const getUserStories = () => dispatch => {
     axios.get('/api/stories')
