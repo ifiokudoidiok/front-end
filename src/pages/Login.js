@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Login = (props) => {
     
     const adminLogin = () => {
-        axios.post('https://rhodaiu.herokuapp.com//api/auth/login', values)
+        axios.post('https://rhodai.herokuapp.com//api/auth/login', values)
             .then(res => {       
                 localStorage.setItem('token', res.data.token);
                 stopLoading();
